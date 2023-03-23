@@ -13,21 +13,15 @@ class CreateQuestionsTable extends Migration
      */
     public function up()
     {
-
-        Schema::disableForeignKeyConstraints();
-
-        
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->longText('question');
-            $table->char('difficulty');
+            $table->string('difficulty');
             $table->foreignId('category_id')->constrained('categories');
-            $table->boolean('type');
-            $table->json('choice');
+            $table->string('type');
+            $table->json('choice')->nullable();
             $table->timestamps();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**

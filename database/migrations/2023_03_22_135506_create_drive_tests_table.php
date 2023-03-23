@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRandomQuestionsTable extends Migration
+class CreateDriveTestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,12 @@ class CreateRandomQuestionsTable extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
-
-
-        Schema::create('random_questions', function (Blueprint $table) {
+        Schema::create('drive_tests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('test_id')->constrained('tests');
-            $table->foreignId('category_id')->constrained('categories');
-            $table->string('difficulty');
-            $table->integer('number_of_questions');
+            $table->foreignId('drive_id')->constrained('drives');
             $table->timestamps();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -35,6 +28,6 @@ class CreateRandomQuestionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('random_questions');
+        Schema::dropIfExists('drive_tests');
     }
 }

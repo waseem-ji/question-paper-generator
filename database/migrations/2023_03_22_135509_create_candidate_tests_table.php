@@ -13,20 +13,16 @@ class CreateCandidateTestsTable extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
-        
         Schema::create('candidate_tests', function (Blueprint $table) {
             $table->id();
             $table->json('question_paper');
             $table->json('response')->nullable();
             $table->json('result')->nullable();
-            $table->foreignId('link_to_drive')->constrained('drive_test_lists');
+            $table->foreignId('link_to_drive')->constrained('drive_tests');
             $table->foreignId('candidate_id')->constrained('candidates');
             $table->foreignId('test_id')->constrained('tests');
             $table->timestamps();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**

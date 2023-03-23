@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTestsTable extends Migration
+class CreateTestTokensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateTestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tests', function (Blueprint $table) {
+        Schema::create('test_tokens', function (Blueprint $table) {
             $table->id();
-            $table->string('position');
-            $table->time('duration');
-            $table->longText('instructions');
-            $table->dateTime('creation_date');
+            $table->string('token', 6)->unique();
+            $table->foreignId('drive_test_id')->constrained('drive_tests');
+            $table->dateTime('expiry');
+            $table->boolean('is_expired')->default(true);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateTestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tests');
+        Schema::dropIfExists('test_tokens');
     }
 }

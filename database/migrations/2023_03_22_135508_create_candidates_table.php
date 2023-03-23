@@ -13,19 +13,15 @@ class CreateCandidatesTable extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
-
         Schema::create('candidates', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('phone', 12);
-            $table->string('position');
+            $table->string('position'); // Change to nullable ?
             $table->foreignId('drive_id')->constrained('drives');
             $table->timestamps();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**

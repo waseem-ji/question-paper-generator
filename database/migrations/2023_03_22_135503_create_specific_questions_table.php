@@ -13,16 +13,12 @@ class CreateSpecificQuestionsTable extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
-        
         Schema::create('specific_questions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('test_id')->constrained('tests');
             $table->foreignId('question__id')->constrained('questions');
             $table->timestamps();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**
