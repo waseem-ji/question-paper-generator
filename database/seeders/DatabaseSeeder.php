@@ -30,5 +30,12 @@ class DatabaseSeeder extends Seeder
             'role' =>'admin'
 
         ]);
+        
+        User::create([
+            'name' =>'test',
+            'email' => 'test@gmail.com',
+            'password' => bcrypt('waseemji'),
+            'role' =>'hr'
+        ]);
     }
 }

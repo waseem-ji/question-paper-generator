@@ -22,4 +22,5 @@ Route::get('/login',[LoginController::class,'index'])->name('login');
 Route::post('/login',[LoginController::class,'store']);
 Route::get('logout',[LoginController::class,'logout']);
 
-Route::view('/dashboard','dashboard')->middleware('auth');
+Route::view('/dashboard','dashboard')->middleware(['auth','can:admin']);
+// Route::view('/dashboard','dashboard')->middleware(['auth','can:hr']);
