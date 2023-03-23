@@ -18,7 +18,7 @@ class CreateCandidateTestsTable extends Migration
             $table->json('question_paper');
             $table->json('response')->nullable();
             $table->json('result')->nullable();
-            $table->foreignId('link_to_drive')->constrained('drive_tests');
+            $table->foreignId('drive_test_id')->constrained('drive_tests');
             $table->foreignId('candidate_id')->constrained('candidates');
             $table->foreignId('test_id')->constrained('tests');
             $table->timestamps();
