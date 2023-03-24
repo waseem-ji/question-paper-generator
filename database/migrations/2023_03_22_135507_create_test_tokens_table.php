@@ -15,11 +15,12 @@ class CreateTestTokensTable extends Migration
     {
         Schema::create('test_tokens', function (Blueprint $table) {
             $table->id();
-            $table->string('token', 6)->unique();
             $table->foreignId('drive_test_id')->constrained('drive_tests');
+            $table->string('token', 6)->unique();
             $table->dateTime('expiry');
             $table->boolean('is_expired')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -15,12 +15,13 @@ class CreateCandidatesTable extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('drive_id')->constrained('drives');
             $table->string('name');
             $table->string('email');
             $table->string('phone', 12);
             $table->string('position'); // Change to nullable ?
-            $table->foreignId('drive_id')->constrained('drives');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

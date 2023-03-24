@@ -15,11 +15,12 @@ class CreateRandomQuestionsTable extends Migration
     {
         Schema::create('random_questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('test_id')->constrained('tests');
-            $table->foreignId('category_id')->constrained('categories');
+            $table->foreignId('test_id')->constrained('tests')->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->string('difficulty');
             $table->integer('number_of_questions');
             $table->timestamps();
+            
         });
     }
 

@@ -18,6 +18,7 @@ class CreateDriveTestsTable extends Migration
             $table->foreignId('test_id')->constrained('tests');
             $table->foreignId('drive_id')->constrained('drives');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

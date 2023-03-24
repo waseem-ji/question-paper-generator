@@ -19,6 +19,7 @@ class CreateDrivesTable extends Migration
             $table->string('name');
             $table->string('drive_type');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

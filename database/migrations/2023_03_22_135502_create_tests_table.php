@@ -19,6 +19,7 @@ class CreateTestsTable extends Migration
             $table->time('duration');
             $table->longText('instructions');
             $table->timestamps();
+            $table->softDeletes(); //Would it be better if didnot softdelete this ?
         });
     }
 

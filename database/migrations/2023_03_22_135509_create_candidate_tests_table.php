@@ -15,13 +15,14 @@ class CreateCandidateTestsTable extends Migration
     {
         Schema::create('candidate_tests', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('drive_test_id');
+            $table->foreignId('candidate_id');
+            $table->foreignId('test_id');
             $table->json('question_paper');
             $table->json('response')->nullable();
             $table->json('result')->nullable();
-            $table->foreignId('drive_test_id')->constrained('drive_tests');
-            $table->foreignId('candidate_id')->constrained('candidates');
-            $table->foreignId('test_id')->constrained('tests');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
