@@ -15,8 +15,9 @@ class CreateSpecificQuestionsTable extends Migration
     {
         Schema::create('specific_questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('test_id')->constrained('tests')->cascadeOnDelete();
-            $table->foreignId('question__id')->constrained('questions')->cascadeOnDelete();
+            // $table->foreignId('test_id')->constrained('tests')->cascadeOnDelete();
+            $table->foreignId('test_id');
+            $table->foreignId('question__id');
             $table->timestamps();
             $table->softDeletes();
         });

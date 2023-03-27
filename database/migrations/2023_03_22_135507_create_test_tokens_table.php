@@ -15,7 +15,7 @@ class CreateTestTokensTable extends Migration
     {
         Schema::create('test_tokens', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('drive_test_id')->constrained('drive_tests');
+            $table->foreignId('drive_test_id');
             $table->string('token', 6)->unique();
             $table->dateTime('expiry');
             $table->boolean('is_expired')->default(true);

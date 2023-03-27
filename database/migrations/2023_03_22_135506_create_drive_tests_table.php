@@ -15,8 +15,8 @@ class CreateDriveTestsTable extends Migration
     {
         Schema::create('drive_tests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('test_id')->constrained('tests');
-            $table->foreignId('drive_id')->constrained('drives');
+            $table->foreignId('test_id');
+            $table->foreignId('drive_id');
             $table->timestamps();
             $table->softDeletes();
         });
