@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\QuestionController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,4 +25,5 @@ Route::post('/login',[LoginController::class,'store']);
 Route::get('logout',[LoginController::class,'logout']);
 
 Route::view('/dashboard','dashboard')->middleware(['auth','can:admin']);
-// Route::view('/dashboard','dashboard')->middleware(['auth','can:hr']);
+
+
