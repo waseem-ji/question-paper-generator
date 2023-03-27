@@ -1,5 +1,7 @@
 <x-layout>
-
+<x-slot:title>
+    Dashboard
+</x-slot:title>
     <div class="row">
 
         <!-- Earnings (Monthly) Card Example -->
