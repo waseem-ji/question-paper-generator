@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Drive extends Model
 {
-    use HasFactory,SoftDeletes,CascadeSoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
-    protected $cascadeDeletes = ['drive_test' , 'candidate'];
+
+
     protected $guarded = ['id'];
 
     public function drive_test()

@@ -16,13 +16,12 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
-
             $table->longText('question');
             $table->string('difficulty');
             $table->string('type');
             $table->json('choice')->nullable();
             $table->timestamps();
-            
+            $table->softDeletes();
         });
     }
 
