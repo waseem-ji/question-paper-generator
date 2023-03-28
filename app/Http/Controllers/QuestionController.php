@@ -14,7 +14,8 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return view('questions.index');
+        $questions = Question::paginate(10);
+        return view('questions.index', compact(['questions']));
     }
 
     /**
@@ -49,7 +50,7 @@ class QuestionController extends Controller
 
         Question::create($attributes);
 
-        return back()->withErrors($attributes);
+        return redirect('/questions')->with('success', 'New question added');
     }
 
     /**
@@ -69,9 +70,9 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Question $question)
     {
-        //
+        return view('questions.edit', compact(['question']));
     }
 
     /**
@@ -81,9 +82,23 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Question $question)
     {
-        //
+        $attributes = request()->validate([
+            'question' => 'required',
+            'difficulty' => 'required',
+            'type' => 'required',
+            'category_id' => 'required'
+        ]);
+
+        if (isset(request()->choice)) {
+            request()->choice = json_encode(request()->choice);
+            $attributes['choice'] = request()->choice;
+        }
+
+        $question->update($attributes);
+
+        return redirect('/questions')->with('success', 'New question added');
     }
 
     /**
@@ -92,8 +107,9 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Question $question)
     {
-        //
+        $question->delete();
+        return redirect('/questions')->with('success', 'Question Archived Succesfully');
     }
 }
