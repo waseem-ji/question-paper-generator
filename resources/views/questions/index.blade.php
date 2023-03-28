@@ -11,18 +11,19 @@
 
             </div>
             @foreach ($questions as $question)
-                <li href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3 " aria-current="true">
+                <li onclick="location.href='/questions/{{ $question->id }}' "
+                    class="list-group-item list-group-item-action d-flex gap-3 py-3 " aria-current="true">
 
                     <div class="d-flex gap-2 w-75 justify-content-between">
                         <div>
                             <p></p>
-                            <h6 class="mb-0">{{ $question->question }} <span class="badge bg-primary ms-3 p-2">
+                            <h6 href="sads" class="mb-0 h6 text-decoration-none">{{ $question->question }} <span
+                                    class="badge bg-primary ms-3 p-2">
                                     {{ $question->category->name }}</span> </h6>
                             <p class="mb-0 opacity-75 mt-2">
                                 <span
-                                    class="badge <span class= p-2 '
-                                    @php
-switch ($question->difficulty) {
+                                    class="badge < class= p-2 '
+                                    @php switch ($question->difficulty) {
                                         case 'hard':
                                             echo 'bg-danger';
                                             break;
@@ -35,7 +36,7 @@ switch ($question->difficulty) {
                                     } @endphp
                                     ' >
                                 {{ $question->text }}
-                            </span> ">
+                            ">
                                     {{ $question->difficulty }} </span>
                                 <span class="badge bg-info p-2 ms-2"> {{ $question->type }} </span>
                             </p>
@@ -43,9 +44,9 @@ switch ($question->difficulty) {
 
                     </div>
                     <div class="d-flex flex-row-reverse w-25 gap-3 mx-3 align-items-center">
-                        <div class="">
+                        <div>
 
-                            <form class="dropdown-item text-center" action="questions/{{ $question->id }}"
+                            <form class="dropdown-item text-center" action="{{ route('questions.destroy', $question->id) }}"
                                 method="post">
                                 @csrf
                                 @method('DELETE')
@@ -57,7 +58,7 @@ switch ($question->difficulty) {
                             </form>
 
                         </div>
-                        <div class="">
+                        <div>
                             <a href="/questions/{{ $question->id }}/edit" class="btn btn-warning">Edit</a>
                         </div>
                     </div>
@@ -73,7 +74,4 @@ switch ($question->difficulty) {
     </div>
 
     <x-flash />
-    Mozilor2017*
 </x-layout>
-
-{{-- {"id":1,"category_id":2,"question":"Quia vel autem vitae","difficulty":"hard","type":"programming","choice":null,"created_at":"2023-03-27T17:47:58.000000Z","updated_at":"2023-03-27T17:47:58.000000Z","deleted_at":null} --}}
