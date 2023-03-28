@@ -73,8 +73,9 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-success">Submit</button>
+                    <div class="d-flex justify-content-between">
+                        <a href="/questions" class="mt-3 text-decoration-none btn btn-danger ">Cancel</a>
+                        <button type="submit" class="btn btn-success mt-3 me-4">Submit</button>
                     </div>
                 </div>
             </form>
