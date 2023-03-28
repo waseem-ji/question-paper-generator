@@ -36,6 +36,9 @@
                         </form>
 
                     </div>
+                    <div>
+                        <a href="/categories/{{ $item->id }}/edit" class="btn btn-warning">Edit</a>
+                    </div>
 
                 </div>
             </li>

@@ -62,9 +62,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('category.edit', compact(['category']));
     }
 
     /**
@@ -74,9 +74,14 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Category $category)
     {
-        //
+        $attributes =  request()->validate([
+            'name' => 'required|max:255|unique:categories,name',
+           ]);
+
+        $category->update($attributes);
+        return redirect(route('categories.index'))->with('info', 'Category name updated');
     }
 
     /**
@@ -88,6 +93,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect(route('categories.index'))->with('success', 'Category Archieved');
+        return redirect(route('categories.index'))->with('danger', 'Category Archieved');
     }
 }

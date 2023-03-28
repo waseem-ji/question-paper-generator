@@ -29,4 +29,4 @@ Route::view('/dashboard', 'dashboard')->middleware(['auth','can:admin']);
 //  need to add middleware
 Route::resource('/questions',QuestionController::class);
 
-Route::resource('/categories',CategoryController::class)->except(['show','update','edit']);
+Route::resource('/categories',CategoryController::class)->except(['show']);
