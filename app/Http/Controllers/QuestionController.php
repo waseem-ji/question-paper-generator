@@ -101,7 +101,7 @@ class QuestionController extends Controller
 
         $question->update($attributes);
 
-        return redirect('/questions')->with('success', 'New question added');
+        return redirect('/questions')->with('info', 'New question added');
     }
 
     /**
@@ -113,6 +113,6 @@ class QuestionController extends Controller
     public function destroy(Question $question)
     {
         $question->delete();
-        return redirect('/questions')->with('success', 'Question Archived Succesfully');
+        return redirect('/questions')->with('danger', 'Question Archived Succesfully');
     }
 }
