@@ -11,7 +11,7 @@
                     <div class="col ">
                         <label for="question" class="ms-3 form-label">Enter Question</label>
                         <textarea class="form-control" rows="3" id="question" name="question"></textarea>
-                        @error('questions')
+                        @error('question')
                             <p class="text-danger"> {{ $message }}</p>
                         @enderror
                     </div>
@@ -19,7 +19,7 @@
                 <div class="row mt-4 mb-4">
                     <div class="col">
                         <select class="form-select" name="difficulty">
-                            <option selected>Select Difficulty</option>
+                            <option value="" selected>Select Difficulty</option>
                             <option value="easy">Easy</option>
                             <option value="medium">Medium</option>
                             <option value="hard">Hard</option>
@@ -29,8 +29,8 @@
                         @enderror
                     </div>
                     <div class="col">
-                        <select class="form-select" id="type" name="type">
-                            <option selected>Select Question Type</option>
+                        <select class="form-select" id="type" name="type" placeholder="sdfsdf">
+                            <option value="" selected>Select Question Type</option>
                             <option value="programming">Programming</option>
                             <option value="mcq">MCQ</option>
                         </select>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="col">
                         <select class="form-select" name="category_id">
-                            <option selected>Select Category</option>
+                            <option value="" selected>Select Category</option>
                             {{-- category --}}
                             @php
                                 $categories = \App\Models\Category::all();
