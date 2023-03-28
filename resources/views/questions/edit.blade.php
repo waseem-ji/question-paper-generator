@@ -3,6 +3,7 @@
         Edit Question
     </x-slot:title>
 
+<x-panel>
     <form action="/questions/{{$question->id}}" method="post">
         @csrf
         @method('PATCH')
@@ -78,6 +79,9 @@
             </div>
         </div>
     </form>
+</x-panel>
+
+
     <script>
         $(function() {
 
