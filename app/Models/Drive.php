@@ -15,14 +15,5 @@ class Drive extends Model
 
     protected $guarded = ['id'];
 
-    public function drive_test()
-    {
-        return $this->hasMany(DriveTest::class);
-    }
-
-    public function candidate()
-    {
-        return $this->hasMany(Candidate::class);
-        // Or is one candidates only allowed in one drive ?
-    }
+    
 }

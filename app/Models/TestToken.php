@@ -12,4 +12,9 @@ class TestToken extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
+
+    public function driveTest()
+    {
+        return $this->belongsTo(DriveTest::class);
+    }
 }

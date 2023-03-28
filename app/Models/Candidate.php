@@ -14,8 +14,9 @@ class Candidate extends Model
 
     protected $guarded = ['id'];
 
-    public function candidate_test()
+    public function drive()
     {
-        return $this->hasMany(CandidateTest::class);
+        return $this->belongsTo(Drive::class);
     }
+
 }

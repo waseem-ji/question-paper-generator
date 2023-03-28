@@ -13,24 +13,4 @@ class Test extends Model
 
 
     protected $guarded = ['id'];
-
-    public function specific_question()
-    {
-        return $this->hasMany(SpecificQuestion::class);
-    }
-
-    public function random_question()
-    {
-        return $this->hasMany(RandomQuestion::class);
-    }
-
-    public function drive_test()
-    {
-        return $this->belongsTo(DriveTest::class);
-    }
-
-    public function candidate_test()
-    {
-        return $this->belongsTo(CandidateTest::class);
-    }
 }

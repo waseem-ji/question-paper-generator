@@ -13,8 +13,9 @@ class Question extends Model
 
     protected $guarded = ['id'];
 
-    public function specific_question()
+   
+    public function category()
     {
-        return $this->hasMany(SpecificQuestion::class);
+        return $this->belongsTo(Category::class);
     }
 }

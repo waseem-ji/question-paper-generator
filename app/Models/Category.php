@@ -12,14 +12,4 @@ class Category extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
-
-    public function question()
-    {
-        return $this->hasMany(Question::class);
-    }
-
-    public function random_question()
-    {
-        return $this->hasMany(RandomQuestion::class);
-    }
 }

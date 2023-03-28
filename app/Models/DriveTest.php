@@ -15,14 +15,14 @@ class DriveTest extends Model
 
     protected $guarded = ['id'];
 
-    public function test_token()
+
+    public function test()
     {
-        return $this->belongsTo(TestToken::class);
+        return $this->belongsTo(Test::class);
     }
 
-
-    public function candidate_test()
+    public function drive()
     {
-        return $this->hasMany(CandidateTest::class);
+        return $this->hasMany(Drive::class);
     }
 }

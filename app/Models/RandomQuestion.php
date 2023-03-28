@@ -12,4 +12,14 @@ class RandomQuestion extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
+
+    public function test()
+    {
+        return $this->belongsTo(Test::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

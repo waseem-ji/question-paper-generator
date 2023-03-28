@@ -12,4 +12,15 @@ class SpecificQuestion extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
+
+    public function test()
+    {
+        return $this->belongsTo(Test::class);
+    }
+
 }

@@ -12,4 +12,18 @@ class CandidateTest extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
+
+    public function driveTest()
+    {
+        return $this->hasMany(DriveTest::class);
+    }
+    public function candidate()
+    {
+        return $this->hasMany(Candidate::class);
+    }
+
+    public function test()
+    {
+        return $this->belongsTo(Test::class);
+    }
 }
