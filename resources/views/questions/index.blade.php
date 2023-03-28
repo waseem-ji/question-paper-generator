@@ -17,7 +17,7 @@
                     <div class="d-flex gap-2 w-75 justify-content-between">
                         <div>
                             <p></p>
-                            <h6 href="sads" class="mb-0 h6 text-decoration-none">{{ $question->question }} <span
+                            <h6  class="mb-0 h6 text-decoration-none">{{ $question->question }} <span
                                     class="badge bg-primary ms-3 p-2">
                                     {{ $question->category->name }}</span> </h6>
                             <p class="mb-0 opacity-75 mt-2">
