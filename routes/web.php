@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DriveController;
 use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +31,5 @@ Route::view('/dashboard', 'dashboard')->middleware(['auth','can:admin']);
 Route::resource('/questions',QuestionController::class);
 
 Route::resource('/categories',CategoryController::class)->except(['show']);
+
+Route::resource('/drives', DriveController::class);
