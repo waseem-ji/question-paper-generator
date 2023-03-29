@@ -2,7 +2,7 @@
     <x-slot:title>
         Create
     </x-slot:title>
-    <x-panel class="w-50 mx-auto">
+    <x-panel class="w-50 mx-auto bg-light">
         <div class="d-flex justify-content-between mb-2 border-bottom pb-3">
             <h3> Add New Category</h3>
 

@@ -3,14 +3,17 @@
         Category
     </x-slot:title>
 
-    <x-panel class="w-75 mx-auto">
+    <x-panel class="w-75 mx-auto bg-warning bg-opacity-25">
         <div class="d-flex justify-content-between mb-5">
             <h3>All Category</h3>
             <a class="btn btn-success me-3" href="{{ route('categories.create') }} "> Add New Category</a>
 
         </div>
+        <div class="list-group">
+
+
         @foreach ($category as $item)
-            <li class="list-group-item list-group-item-action border w-75 mx-auto d-flex gap-3 py-3  "
+            <li class="list-group-item list-group-item-action border border-dark bg-secondary bg-opacity-25 w-75 mx-auto d-flex gap-3 py-3  "
                 aria-current="true">
 
                 <div class="d-flex gap-2 w-75 justify-content-between">
@@ -43,6 +46,7 @@
                 </div>
             </li>
         @endforeach
+    </div>
     </x-panel>
     <x-flash />
 </x-layout>
