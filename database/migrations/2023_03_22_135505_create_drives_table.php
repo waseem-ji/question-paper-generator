@@ -15,7 +15,6 @@ class CreateDrivesTable extends Migration
     {
         Schema::create('drives', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('creation_date');
             $table->string('name');
             $table->string('drive_type');
             $table->timestamps();
