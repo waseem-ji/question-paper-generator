@@ -1,33 +1,46 @@
 <x-layout>
     <x-slot:title>
-        View Questions
+        View Question
     </x-slot:title>
     <x-panel>
 
+        <div class="d-flex justify-content-between mb-2">
+            {{-- <h3>All Questions</h3> --}}
+            {{-- <div class=""></div> --}}
+            <a class="btn btn-primary me-3" href="/questions"> Go back</a>
+
+        </div>
+
         <div class="card w-75 mx-auto m-5">
             <div class="card-header">
-                Question {{ $question->id }}
-                <span class="badge bg-primary ms-3 p-2">
-                    {{ $question->category->name }}</span>
-                <span
-                    class="badge < class= p-2 '
-                                    @php switch ($question->difficulty) {
-                                        case 'hard':
-                                            echo 'bg-danger';
-                                            break;
-                                        case 'medium':
-                                            echo 'bg-warning';
-                                            break;
-                                        case 'easy':
-                                            echo 'bg-success';
-                                            break;
-                                    } @endphp
-                                    ' >
-                                {{ $question->text }}
-                            ">
-                    {{ $question->difficulty }} </span>
+                <div class="d-flex justify-content-between">
+                    <div class="">
+                        Question {{ $question->id }}
+                    </div>
+                    <div class="me-3">
+                        <span class="badge bg-primary ms-3 p-2">
+                            {{ $question->category->name }}</span>
+                        <span
+                            class="badge < class= p-2 '
+                                            @php switch ($question->difficulty) {
+                                                case 'hard':
+                                                    echo 'bg-danger';
+                                                    break;
+                                                case 'medium':
+                                                    echo 'bg-warning';
+                                                    break;
+                                                case 'easy':
+                                                    echo 'bg-success';
+                                                    break;
+                                            } @endphp
+                                            ' >
+                                        {{ $question->text }}
+                                    ">
+                            {{ $question->difficulty }} </span>
 
-                <span class="badge bg-info p-2 "> {{ $question->type }} </span>
+                        <span class="badge bg-info p-2 "> {{ $question->type }} </span>
+                    </div>
+                </div>
 
             </div>
             <div class="card-body">
