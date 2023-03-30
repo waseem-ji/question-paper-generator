@@ -17,7 +17,7 @@ class CreateSpecificQuestionsTable extends Migration
             $table->id();
             // $table->foreignId('test_id')->constrained('tests')->cascadeOnDelete();
             $table->foreignId('test_id');
-            $table->foreignId('question__id');
+            $table->foreignId('question_id');
             $table->timestamps();
             $table->softDeletes();
         });
