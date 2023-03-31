@@ -13,4 +13,13 @@ class Test extends Model
 
 
     protected $guarded = ['id'];
+    public function specific_questions()
+    {
+        return $this->hasMany(SpecificQuestion::class);
+    }
+
+    public function random_questions()
+    {
+        return $this->hasMany(RandomQuestion::class);
+    }
 }
