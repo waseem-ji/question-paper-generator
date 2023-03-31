@@ -19,7 +19,7 @@ class CreateSpecificQuestionsTable extends Migration
             $table->foreignId('test_id');
             $table->foreignId('question_id');
             $table->timestamps();
-            $table->softDeletes();
+            // $table->softDeletes();
         });
     }
 

@@ -20,7 +20,7 @@ class CreateRandomQuestionsTable extends Migration
             $table->string('difficulty');
             $table->integer('number_of_questions');
             $table->timestamps();
-            $table->softDeletes();
+            // $table->softDeletes();
         });
     }
 
