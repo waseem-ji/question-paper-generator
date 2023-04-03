@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Drive;
+use App\Models\DriveTest;
 use Illuminate\Http\Request;
 
 class DriveController extends Controller
@@ -55,7 +56,8 @@ class DriveController extends Controller
      */
     public function show(Drive $drive)
     {
-        return view('drive.show',compact(['drive']));
+        $driveTests = DriveTest::where('drive_id',$drive->id)->get();
+        return view('drive.show',compact(['drive','driveTests']));
     }
 
     /**

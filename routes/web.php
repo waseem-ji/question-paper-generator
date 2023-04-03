@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddQuestionController;
+use App\Http\Controllers\AddTestController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DriveController;
@@ -45,4 +46,8 @@ Route::get('search', [AddQuestionController::class,'search'])->name('search');
 Route::post('addSpecific', [AddQuestionController::class,'storeSpecific'])->name('storeSpecific');
 Route::delete('removeSpecific/{specificQuestion}', [AddQuestionController::class, 'removeSpecific'])->name('removeSpecific');
 Route::delete('removeRandom/{randomQuestion}', [AddQuestionController::class, 'removeRandom'])->name('removeRandom');
+
+Route::get('{id}/addTest', [AddTestController::class,'create'])->name('addTest');
+Route::post('addTest', [AddTestController::class,'store'])->name('storeTest');
+Route::delete('removeTest/{driveTest}', [AddTestController::class,'destroy'])->name('removeTest');
 
