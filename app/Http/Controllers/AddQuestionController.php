@@ -34,7 +34,12 @@ class AddQuestionController extends Controller
         if (in_array($new_combination, $arr)) {
             return redirect()->back()->withErrors(['error' => 'The choosen random combination already exists.Go to edit menu to make changes']);
         } else {
-            RandomQuestion::create($attributes);
+            RandomQuestion::create([
+                'test_id' => $attributes['test_id'],
+                'category_id' => $attributes['category_id'],
+                'difficulty' => $attributes['difficulty'],
+                'number_of_questions' => $attributes['number_of_questions']
+            ]);
             return back()->with('success', 'Random Questions Added');
         }
     }
@@ -68,7 +73,10 @@ class AddQuestionController extends Controller
             echo "asd";
             return redirect()->back()->withErrors(['error' => 'The question has already been choosen for this test.']);
         } else {
-            SpecificQuestion::create($attributes);
+            SpecificQuestion::create([
+                'test_id' => $attributes['test_id'],
+                'question_id' => $attributes['question_id']
+            ]);
             return back()->with('success', 'Question Added');
         }
     }
@@ -77,12 +85,12 @@ class AddQuestionController extends Controller
     {
         // dd($specificQuestion->test_id);
         $specificQuestion->delete();
-        return redirect(route('tests.show',$specificQuestion->test_id))->with('danger', 'Question Deleted Succesfully');
+        return redirect(route('tests.show', $specificQuestion->test_id))->with('danger', 'Question Deleted Succesfully');
     }
 
     public function removeRandom(RandomQuestion $randomQuestion)
     {
         $randomQuestion->delete();
-        return redirect(route('tests.show',$randomQuestion->test_id))->with('danger', 'Random Questions Removed');
+        return redirect(route('tests.show', $randomQuestion->test_id))->with('danger', 'Random Questions Removed');
     }
 }

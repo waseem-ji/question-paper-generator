@@ -33,7 +33,10 @@ class AddTestController extends Controller
         ]);
 
         // Verify if user is attempting to enter repeated entry
-        DriveTest::create($attributes);
+        DriveTest::create([
+            'test_id' => $attributes['test_id'],
+            'drive_id' => $attributes['drive_id']
+        ]);
         return redirect(route('drives.show', $attributes['drive_id']))->with('success', 'Test Added to Drive');
     }
 

@@ -38,12 +38,15 @@ class DriveController extends Controller
     public function store()
     {
 
-        $attributes =  request()->validate([
+        request()->validate([
             'name' => 'required',
             'drive_type' => 'required'
         ]);
 
-        Drive::create($attributes);
+        Drive::create([
+            'name' => request()->name,
+            'drive_type' => request()->drive_type
+        ]);
 
         return redirect(route('drives.index'))->with('success', 'New Drive added');
     }
@@ -80,12 +83,15 @@ class DriveController extends Controller
      */
     public function update(Drive $drive)
     {
-        $attributes =  request()->validate([
+        request()->validate([
             'name' => 'required',
             'drive_type' => 'required'
         ]);
 
-        $drive->update($attributes);
+        $drive->update([
+            'name' => request()->name,
+            'drive_type' =>request()->drive_type
+        ]);
 
         return redirect(route('drives.index'))->with('info','Drive Edited');
     }

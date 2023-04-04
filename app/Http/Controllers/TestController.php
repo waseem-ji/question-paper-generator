@@ -36,14 +36,17 @@ class TestController extends Controller
      */
     public function store()
     {
-        $attributes = request()->validate([
+        request()->validate([
             'name' => 'required',
             'instructions' => 'required',
             // 'duration' => ['required','numeric']
 
         ]);
 
-        Test::create($attributes);
+        Test::create([
+            'name' => request()->name,
+            'instructions' => request()->instructions
+        ]);
 
         return redirect(route('tests.index'))->with('success','New test created');
     }
@@ -80,14 +83,17 @@ class TestController extends Controller
      */
     public function update(Test $test)
     {
-        $attributes = request()->validate([
+        request()->validate([
             'name' => 'required',
             'instructions' => 'required',
             // 'duration' => ['required','numeric']
 
 
         ]);
-        $test->update($attributes);
+        $test->update([
+            'name' => request()->name,
+            'instructions' => request()->instructions
+        ]);
 
         return redirect(route('tests.index'))->with('info', 'Test Details updated');
 
