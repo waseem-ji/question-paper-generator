@@ -48,7 +48,14 @@ class QuestionController extends Controller
             $attributes['choice'] = request()->choice;
         }
 
-        Question::create($attributes);
+
+        Question::create([
+            'question' => $attributes['question'],
+            'difficulty' => $attributes['difficulty'],
+            'type' => $attributes['type'],
+            'category_id'=>$attributes['category_id'],
+            'choice' =>$attributes['choice']??null
+        ]);
 
         return redirect('/questions')->with('success', 'New question added');
     }
@@ -99,7 +106,13 @@ class QuestionController extends Controller
             $attributes['choice'] = request()->choice;
         }
 
-        $question->update($attributes);
+        $question->update([
+            'question' => $attributes['question'],
+            'difficulty' => $attributes['difficulty'],
+            'type' => $attributes['type'],
+            'category_id'=>$attributes['category_id'],
+            'choice' =>$attributes['choice']??null
+        ]);
 
         return redirect('/questions')->with('info', 'New question added');
     }
