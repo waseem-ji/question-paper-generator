@@ -39,8 +39,10 @@ class CategoryController extends Controller
         $attributes =  request()->validate([
          'name' => 'required|max:255|unique:categories,name',
         ]);
-
-        Category::create($attributes);
+        // Category::create($attributes);
+        Category::create([
+            'name' => request()->name
+        ]);
 
         return redirect(route('categories.index'))->with('success', 'New Category  created');
     }
@@ -80,7 +82,9 @@ class CategoryController extends Controller
             'name' => 'required|max:255|unique:categories,name',
            ]);
 
-        $category->update($attributes);
+        $category->update([
+            'name' => request()->name
+        ]);
         return redirect(route('categories.index'))->with('info', 'Category name updated');
     }
 
