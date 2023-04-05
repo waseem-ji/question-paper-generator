@@ -59,8 +59,8 @@ class DriveController extends Controller
      */
     public function show(Drive $drive)
     {
-        $driveTests = DriveTest::where('drive_id',$drive->id)->get();
-        return view('drive.show',compact(['drive','driveTests']));
+
+        return view('drive.show',compact(['drive']));
     }
 
     /**
@@ -106,5 +106,11 @@ class DriveController extends Controller
     {
         $drive->delete();
         return redirect(route('drives.index') )->with('danger', 'Drive Archived Succesfully');
+    }
+
+    public function showTests(Drive $drive)
+    {
+        $driveTests = DriveTest::where('drive_id',$drive->id)->get();
+        return view('drive.allTests',compact(['driveTests','drive']));
     }
 }
