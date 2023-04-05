@@ -17,7 +17,8 @@
     <x-panel class="mt-5 border-2 border-success-subtle">
         <div class="d-flex justify-content-between mb-5">
 
-            <a class="btn btn-primary me-3" href="{{ route('drives.index') }} ">Go Back</a>
+            {{-- <a class="btn btn-primary me-3" href="{{ route('drives.index') }} ">Go Back</a> --}}
+            <p></p>
             <a class="btn btn-success me-3" href="{{ route('addTest', $drive->id) }} "> Add New Test</a>
 
         </div>
@@ -48,7 +49,7 @@
 
                         </div>
                         <div class="">
-                            <a href="{{ route('driveTest',$test->test->id) }}"
+                            <a href="{{ route('driveTest',$test->id) }}"
                                 class="btn btn-success border border-warning border-4">View</a>
                         </div>
 

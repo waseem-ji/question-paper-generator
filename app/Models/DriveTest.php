@@ -23,6 +23,6 @@ class DriveTest extends Model
 
     public function drive()
     {
-        return $this->hasMany(Drive::class);
+        return $this->belongsTo(Drive::class);
     }
 }

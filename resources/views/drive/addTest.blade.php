@@ -3,7 +3,14 @@
         Add Test to drive
     </x-slot:title>
     <x-panel>
-        {{-- List down aa availabel test --}}
+
+        <div class="d-flex justify-content-between mb-5">
+
+            <a class="btn btn-primary me-3" href="{{ route('showDriveTests',$drive_id) }} ">Go Back</a>
+            <p></p>
+            {{-- <a class="btn btn-success me-3" href="{{ route('addTest', $drive->id) }} "> Add New Test</a> --}}
+
+        </div>
         <div class="list-group">
             @foreach ($tests as $test)
                 <li class="list-group-item list-group-item-action border border-secondary border-3 mx-auto d-flex gap-3 py-3 mb-4 "

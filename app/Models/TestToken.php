@@ -15,6 +15,6 @@ class TestToken extends Model
 
     public function driveTest()
     {
-        return $this->belongsTo(DriveTest::class);
+        return $this->belongsTo(DriveTest::class,'drive_test_id');
     }
 }
