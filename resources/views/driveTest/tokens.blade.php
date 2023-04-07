@@ -54,6 +54,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Token</th>
+                            <th scope="col">Created At</th>
                             <th scope="col">Expiry</th>
                             <th scope="col">Status</th>
                         </tr>
@@ -63,6 +64,7 @@
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $token->token }}</td>
+                                <td>{{ $token->created_at }}</td>
                                 <td>{{ $token->expiry }}</td>
                                 <td>{{ $token->is_expired ? 'Expired' : 'Active' }}</td>
                             </tr>
