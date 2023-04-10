@@ -31,41 +31,42 @@ Route::get('/', [LoginController::class,'index'])->name('login');
 Route::post('/login', [LoginController::class,'store']);        //Should we rename this as adminLogin , adminLogout ?
 Route::get('logout', [LoginController::class,'logout']);
 
-Route::view('/dashboard', 'dashboard')->middleware(['auth','can:admin']);
 
-//  need to add middleware
-Route::resource('/questions', QuestionController::class);
+Route::middleware(['auth','can:admin'])->group( function() {
+    Route::view('/dashboard', 'dashboard');
+    Route::resource('/questions', QuestionController::class);
 
-Route::resource('/categories', CategoryController::class)->except(['show']);
+    Route::resource('/categories', CategoryController::class)->except(['show']);
 
-Route::get('drives/{drive}/tests', [DriveController::class,'showTests'])->name('showDriveTests');
-Route::resource('/drives', DriveController::class);
+    Route::get('drives/{drive}/tests', [DriveController::class,'showTests'])->name('showDriveTests');
+    Route::resource('/drives', DriveController::class);
 
-Route::resource('/tests', TestController::class);
-
-
-Route::get('{id}/addQuestion', [AddQuestionController::class,'create'])->name('addQuestion');
-Route::post('addRandom', [AddQuestionController::class,'storeRandom'])->name('storeRandom');
-Route::get('search', [AddQuestionController::class,'search'])->name('search');
-Route::post('addSpecific', [AddQuestionController::class,'storeSpecific'])->name('storeSpecific');
-Route::delete('removeSpecific/{specificQuestion}', [AddQuestionController::class, 'removeSpecific'])->name('removeSpecific');
-Route::delete('removeRandom/{randomQuestion}', [AddQuestionController::class, 'removeRandom'])->name('removeRandom');
+    Route::resource('/tests', TestController::class);
 
 
-Route::get('{id}/addTest', [AddTestController::class,'create'])->name('addTest');
-Route::post('addTest', [AddTestController::class,'store'])->name('storeTest');
-Route::delete('removeTest/{driveTest}', [AddTestController::class,'destroy'])->name('removeTest');
+    Route::get('{id}/addQuestion', [AddQuestionController::class,'create'])->name('addQuestion');
+    Route::post('addRandom', [AddQuestionController::class,'storeRandom'])->name('storeRandom');
+    Route::get('search', [AddQuestionController::class,'search'])->name('search');
+    Route::post('addSpecific', [AddQuestionController::class,'storeSpecific'])->name('storeSpecific');
+    Route::delete('removeSpecific/{specificQuestion}', [AddQuestionController::class, 'removeSpecific'])->name('removeSpecific');
+    Route::delete('removeRandom/{randomQuestion}', [AddQuestionController::class, 'removeRandom'])->name('removeRandom');
 
-Route::post('{driveTest}/generateToken', [TestTokenController::class,'generateToken'])->name('generateToken');
-Route::get('driveTest/tokens/{driveTest}', [DriveTestController::class,'viewTokens'])->name('driveTest.tokens');
-Route::get('driveTest/{driveTest}', [DriveTestController::class,'index'])->name('driveTest');
+
+    Route::get('{id}/addTest', [AddTestController::class,'create'])->name('addTest');
+    Route::post('addTest', [AddTestController::class,'store'])->name('storeTest');
+    Route::delete('removeTest/{driveTest}', [AddTestController::class,'destroy'])->name('removeTest');
+
+    Route::post('{driveTest}/generateToken', [TestTokenController::class,'generateToken'])->name('generateToken');
+    Route::get('driveTest/tokens/{driveTest}', [DriveTestController::class,'viewTokens'])->name('driveTest.tokens');
+    Route::get('driveTest/{driveTest}', [DriveTestController::class,'index'])->name('driveTest');
+});
 
 //Candidate routes
 
 Route::prefix('candidate')->group(function () {
     Route::get('login', [CandidateController::class,'login'])->name('candidate.login');
     Route::post('login', [CandidateController::class,'verifyToken'])->name('candidate.verifyToken');
-    Route::get('Email/{token}', [CandidateController::class,'emailView'])->name('candidate.email');
+    Route::get('email/{token}', [CandidateController::class,'emailView'])->name('candidate.email');
     Route::post('email', [CandidateController::class,'checkEmail'])->name('candidate.verifyEmail');
     Route::get('register/{candidate}',[CandidateController::class,'registerView'])->name('candidate.create');
     Route::post('register/{candidate}',[CandidateController::class,'register'])->name('candidate.register');
