@@ -7,8 +7,6 @@ use App\Models\DriveTest;
 use App\Models\TestToken;
 use Illuminate\Http\Request;
 
-// use Illuminate\Support\Str;
-
 class TestTokenController extends Controller
 {
     public function generatetoken(DriveTest $driveTest)
@@ -18,11 +16,13 @@ class TestTokenController extends Controller
 
         $usedTokens = TestToken::all();
         $arr = array();
+
         foreach ($usedTokens as $tokens) {
             $arr[] = $tokens->token;
         }
 
         $token = rand(100000, 999999);
+
         while (true) {
             if(in_array($token,$arr)){
                 $token = rand(100000, 999999);
@@ -31,7 +31,7 @@ class TestTokenController extends Controller
                 break;
             }
         }
-        // dd($attributes);
+
         TestToken::create([
             'drive_test_id' => $driveTest->id,
             'token' => $token,

@@ -39,7 +39,7 @@ class TestController extends Controller
         request()->validate([
             'name' => 'required',
             'instructions' => 'required',
-            // 'duration' => ['required','numeric']
+            // 'duration' => ['required','numeric'] 
 
         ]);
 

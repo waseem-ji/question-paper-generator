@@ -20,7 +20,7 @@ class CandidateController extends Controller
         $request->validate([
             'token' => ['required','digits:6']
         ]);
-        echo $request->token;
+
         $tokenData = TestToken::where('token', $request->token);
 
         $tokenData = $tokenData->firstOr(function () {
@@ -93,9 +93,8 @@ class CandidateController extends Controller
         return view('candidate.edit', compact(['candidate']));
     }
 
-    public function update(Request $request,Candidate $candidate)
+    public function update(Request $request, Candidate $candidate)
     {
-        // dd($candidate);
         $request->validate([
             'email' => ['required','email',  Rule::unique('candidates')->ignore($candidate->id)],
             'name' => ['required'],
@@ -110,7 +109,6 @@ class CandidateController extends Controller
             'position' => $request->position
         ]);
 
-        return view('candidate.details',compact(['candidate']));
-
+        return view('candidate.details', compact(['candidate']));
     }
 }

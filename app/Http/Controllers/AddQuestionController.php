@@ -70,7 +70,6 @@ class AddQuestionController extends Controller
 
 
         if (in_array($new_combination, $arr)) {
-            echo "asd";
             return redirect()->back()->withErrors(['error' => 'The question has already been choosen for this test.']);
         } else {
             SpecificQuestion::create([
@@ -83,7 +82,6 @@ class AddQuestionController extends Controller
 
     public function removeSpecific(SpecificQuestion $specificQuestion)
     {
-        // dd($specificQuestion->test_id);
         $specificQuestion->delete();
         return redirect(route('tests.show', $specificQuestion->test_id))->with('danger', 'Question Deleted Succesfully');
     }

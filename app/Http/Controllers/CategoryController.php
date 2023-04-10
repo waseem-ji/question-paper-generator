@@ -39,7 +39,7 @@ class CategoryController extends Controller
         request()->validate([
          'name' => 'required|max:255|unique:categories,name',
         ]);
-        // Category::create($attributes);
+
         Category::create([
             'name' => request()->name
         ]);
@@ -47,16 +47,7 @@ class CategoryController extends Controller
         return redirect(route('categories.index'))->with('success', 'New Category  created');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.

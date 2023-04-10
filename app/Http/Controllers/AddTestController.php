@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class AddTestController extends Controller
 {
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new Test.
      *
      * @return \Illuminate\Http\Response
      */
@@ -20,7 +20,7 @@ class AddTestController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created test in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -32,7 +32,6 @@ class AddTestController extends Controller
             'drive_id' => 'required'
         ]);
 
-        // Verify if user is attempting to enter repeated entry
         DriveTest::create([
             'test_id' => $attributes['test_id'],
             'drive_id' => $attributes['drive_id']
@@ -50,8 +49,6 @@ class AddTestController extends Controller
      */
     public function destroy(DriveTest $driveTest)
     {
-        // dd(request());
-        // dd($driveTest);
         $driveTest->delete();
         return redirect(route('drives.show', $driveTest->drive_id))->with('danger', 'Test Removed');
     }

@@ -57,6 +57,7 @@ Route::middleware(['auth','can:admin'])->group( function() {
     Route::delete('removeTest/{driveTest}', [AddTestController::class,'destroy'])->name('removeTest');
 
     Route::post('{driveTest}/generateToken', [TestTokenController::class,'generateToken'])->name('generateToken');
+    
     Route::get('driveTest/tokens/{driveTest}', [DriveTestController::class,'viewTokens'])->name('driveTest.tokens');
     Route::get('driveTest/{driveTest}', [DriveTestController::class,'index'])->name('driveTest');
 });

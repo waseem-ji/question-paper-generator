@@ -69,8 +69,7 @@ class QuestionController extends Controller
     public function show(Question $question)
     {
         $choice = json_decode($question->choice);
-        // $choice = $question->choice;
-        // dd($choice);
+
         return view('questions.show', compact(['question','choice']));
     }
 
