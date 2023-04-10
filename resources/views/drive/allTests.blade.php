@@ -14,7 +14,7 @@
         </li>
     </x-slot:navItem>
 
-    <x-panel class="mt-5 border-2 border-success-subtle">
+    <x-panel class="mt-5 border-2 ">
         <div class="d-flex justify-content-between mb-5">
 
             {{-- <a class="btn btn-primary me-3" href="{{ route('drives.index') }} ">Go Back</a> --}}
@@ -50,7 +50,7 @@
                         </div>
                         <div class="">
                             <a href="{{ route('driveTest',$test->id) }}"
-                                class="btn btn-success border border-warning border-4">View</a>
+                                class="btn btn-success ">View</a>
                         </div>
 
                     </div>

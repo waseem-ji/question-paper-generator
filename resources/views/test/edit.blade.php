@@ -29,10 +29,10 @@
             </div>
             <div class="row mb-4 ">
                 <div class="row  pt-4">
-                    <textarea class="form-control" name="instructions" placeholder="Leave a comment here" id="floatingTextarea"
-                        style="height: 300px">{{ $test->instructions }} </textarea>
-                    <label for="floatingTextarea" class="fw-lighter">Edit Text Instructions
+                    <label for="floatingTextarea" class="fw-light mb-2">Edit Text Instructions
                         Here</label>
+                    <textarea class="form-control" name="instructions" placeholder="Enter Test Instruction" id="floatingTextarea"
+                        style="height: 300px">{{ $test->instructions }} </textarea>
                     @error('instructions')
                         <span class="text-danger fs-6">{{ $message }} </span>
                     @enderror

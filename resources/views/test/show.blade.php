@@ -2,7 +2,7 @@
     <x-slot:title>
         View Test
     </x-slot:title>
-    <x-panel class="border-top-0 border-3 shadow-sm bg-success bg-opacity-10">
+    <x-panel class="border border-3 shadow-sm bg-success bg-opacity-10">
         <div class="container">
             <div class="row">
                 <div class="col ">
@@ -26,7 +26,7 @@
             </div>
         </div>
     </x-panel>
-    <x-panel class="mt-5 border-2 border-danger-subtle">
+    <x-panel class="mt-5 border-2 border-dark-subtle mb-4">
         <div class="d-flex justify-content-between mb-5">
 
             <a class="btn btn-primary me-3" href="{{ route('tests.index') }}">Go Back</a>
@@ -41,7 +41,7 @@
 
         {{-- asdasd --}}
         @foreach ($questions as $question)
-            <div class="card w-75 mx-auto m-5 rounded-4">
+            <div class="card w-75 mx-auto m-5 rounded-3 border-2 border-dark ">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <div class="">

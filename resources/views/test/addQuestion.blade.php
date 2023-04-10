@@ -10,7 +10,7 @@
     </x-panel>
     <x-panel class="mt-3  border-2 border-secondary col-9 mx-auto">
 
-        <div class="col">
+        <div class="col mb-3">
             <div class="input-group mb-3">
                 <label class="input-group-text" for="questionType">Question Type</label>
                 <select class="form-select" id="questionType" name="questionType">

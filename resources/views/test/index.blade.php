@@ -2,8 +2,8 @@
     <x-slot:title>
         Tests
     </x-slot:title>
-    <x-panel>
-        <div class="d-flex justify-content-between mb-5">
+    <x-panel class="border-dark bg-light">
+        <div class="d-flex justify-content-between mb-5 pb-4 border-bottom border-3 border-secondary-subtle">
             <h3>All Tests</h3>
             <a class="btn btn-success me-3" href="{{ route('tests.create') }} "> Add a New Test</a>
         </div>

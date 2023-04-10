@@ -8,7 +8,7 @@
 
         </div>
 
-        <x-panel class="w-75 mx-auto border-3 border-secondary">
+        <x-panel class="w-75 mx-auto border-3 border-secondary mb-5">
             <form action="{{ route('drives.store') }} " method="post">
                 @csrf
                 <div class="row mb-4 ">

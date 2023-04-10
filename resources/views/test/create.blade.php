@@ -15,11 +15,11 @@
                             <div class="col">
                                 <div class="row input-group input-group-lg">
                                     <label for="name"
-                                        class="col-auto input-group-text bg-success bg-opacity-25">Enter
+                                        class="col-auto input-group-text bg-success bg-opacity-25 border-0">Enter
                                         test
                                         name</label>
                                     <input type="text" id="name" name="name"
-                                        class="col-4 form-control rounded-end">
+                                        class="col-4 form-control rounded-end border-1">
                                     @error('name')
                                         <span class="text-danger fs-6">{{ $message }} </span>
                                     @enderror
@@ -33,10 +33,10 @@
                             <div class="col">
                                 <div class="row input-group input-group-lg">
                                     <label for="duration"
-                                        class="col-auto  input-group-text bg-success bg-opacity-25">Test
+                                        class="col-auto  input-group-text bg-success bg-opacity-25 border-0 ">Test
                                         Duration</label>
                                     <input type="text" id="duration" name="duration"
-                                        class="col-3 form-control rounded-end" placeholder="Enter duration in minutes">
+                                        class="col-3 form-control rounded-end border-1 " placeholder="Enter duration in minutes">
                                     @error('duration')
                                         <span class="text-danger fs-6">{{ $message }} </span>
                                     @enderror
@@ -50,10 +50,10 @@
                         <div class="row mb-3">
                             <div class="col-11 mx-auto">
                                 <div class="form-floating">
-                                    <textarea class="form-control" name="instructions" placeholder="Leave a comment here" id="floatingTextarea"
-                                        style="height: 300px"></textarea>
                                     <label for="floatingTextarea" class="fw-lighter">Enter Text Instructions
                                         Here</label>
+                                    <textarea class="form-control" name="instructions" placeholder="Edit Test Instructions" id="floatingTextarea"
+                                        style="height: 300px"></textarea>
                                     @error('instructions')
                                         <span class="text-danger fs-6">{{ $message }} </span>
                                     @enderror
