@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:title>
-        Create
+        <h3>Category</h3>
     </x-slot:title>
     <x-panel class="w-50 mx-auto bg-light">
         <div class="d-flex justify-content-between mb-2 border-bottom pb-3">
@@ -11,7 +11,7 @@
         <form action="{{ route('categories.store') }} " method="post">
             @csrf
             <div class="row mb-4">
-                <div class="row mt-5 pt-4">
+                <div class="row mt-3 pt-1">
                     <label for="category" class="ms-3 form-label col">Enter new category</label>
                     <input type="text" name="name" id="category" class="form-control w-50 col">
                     @error('name')

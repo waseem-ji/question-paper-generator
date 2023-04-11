@@ -16,7 +16,7 @@
                                     <span class="input-group-text bg-success-subtle"><i
                                             class="bi bi-person-plus-fill text-white"></i></span>
                                     <input type="text" name="name" class="form-control form-control-lg"
-                                        placeholder="Enter name" value="{{ $candidate->name ?? '' }}">
+                                        placeholder="Enter name" value="{{ old('name')}}">
                                 </div>
                                 @error('name')
                                     <p class="blockquote-footer text-danger mt-2">{{ $message }} </p>
@@ -26,7 +26,7 @@
                                     <span class="input-group-text bg-success-subtle"><i
                                             class="bi bi-person-plus-fill text-white"></i></span>
                                     <input type="text" name="phone_number" class="form-control form-control-lg"
-                                        placeholder="Enter Phone number" value="{{ $candidate->phone ?? '' }}">
+                                        placeholder="Enter Phone number" value="{{old('phone_number') }}">
                                 </div>
                                 @error('phone_number')
                                     <p class="blockquote-footer text-danger mt-2">{{ $message }} </p>
@@ -36,7 +36,7 @@
                                     <span class="input-group-text bg-success-subtle"><i
                                             class="bi bi-person-plus-fill text-white"></i></span>
                                     <input type="text" name="position" class="form-control form-control-lg"
-                                        placeholder="Enter Position" value="{{ $candidate->position ?? '' }}">
+                                        placeholder="Enter Position" value="{{ old('position') }}">
                                 </div>
                                 @error('position')
                                     <p class="blockquote-footer text-danger mt-2">{{ $message }} </p>

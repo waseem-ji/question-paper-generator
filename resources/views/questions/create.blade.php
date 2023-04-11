@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:title>
-        ADD A NEW QUESTION
+       <h3>Add a new Question</h3>
     </x-slot:title>
 
     <div class="col-8 mx-auto">

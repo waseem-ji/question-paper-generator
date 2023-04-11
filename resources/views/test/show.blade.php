@@ -1,31 +1,7 @@
 <x-layout>
     <x-slot:title>
-        View Test
+        <h3>Test: {{ $test->name }}</h3>
     </x-slot:title>
-    <x-panel class="border border-3 shadow-sm bg-success bg-opacity-10">
-        <div class="container">
-            <div class="row">
-                <div class="col ">
-                    <span class="fw-bold fs-4">
-                        {{ $test->name }}
-                    </span>
-                </div>
-                <div class="col">
-
-                    <span class="fs-4">
-
-                    </span>
-                </div>
-                <div class="col text-end">
-                    <span class="fs-5">
-
-                        Test Duration
-
-                    </span>
-                </div>
-            </div>
-        </div>
-    </x-panel>
     <x-panel class="mt-5 border-2 border-dark-subtle mb-4">
         <div class="d-flex justify-content-between mb-5">
 
@@ -41,7 +17,7 @@
 
         {{-- asdasd --}}
         @foreach ($questions as $question)
-            <div class="card w-75 mx-auto m-5 rounded-3 border-2 border-dark ">
+            <div class="card w-75 mx-auto m-5 rounded-3 border-1 border-dark ">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <div class="">
@@ -114,8 +90,8 @@
                                 @method('DELETE')
 
                                 <button type="submit"
-                                    onclick="return confirm('Are you sure you want to delete this item?');"
-                                    class="badge  bg-danger-subtle text-dark p-3  border-0 fs-6 fw-bold w-100 text-decoration-none ">Remove
+                                    onclick="return confirm('Are you sure you want to delete this question from {{$test->name}} exam?');"
+                                    class="badge  bg-danger border-0 p-3 fs-6 fw-bold w-100 text-decoration-none ">Remove
                                     question from test</button>
                             </form>
 
@@ -126,30 +102,39 @@
             </div>
         @endforeach
 
-        <div class="row">
-            @foreach ($random as $item)
+        <div class="col-10 mx-auto">
+            <table class=" table table-bordered table-hover table-light ">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Category</th>
+                        <th>Difficulty</th>
+                        <th>Number of questions</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider border-2">
+                    @foreach ($random as $item)
+                        <tr>
+                            <th scope="row">{{ $loop->iteration }}</th>
+                            <td>{{ $item->category->name }}</td>
+                            <td>{{ $item->difficulty }}</td>
+                            <td>{{ $item->number_of_questions }}</td>
+                            <td>
+                                <form class="" action="{{ route('removeRandom', $item->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
 
-                <div class="col-sm-3 p-4 mb-3">
-                    <div class="card bg-success-subtle shadow rounded-4 border-success">
-                        <div class="card-body">
-                            <h5 class="card-title">Category : {{ $item->category->name }}</h5>
-                            <p class="card-text fs-5">Difficulty : {{ $item->difficulty }} </p>
-                            <p class="card-text">Number of questions : {{ $item->number_of_questions }} </p>
+                                    <button type="submit"
+                                        onclick="return confirm('Are you sure you want to delete this random combination?');"
+                                        class="badge  bg-danger border-danger fs-6 fw-bold text-decoration-none ">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
 
-                            <form class="dropdown-item text-center"
-                                action="{{route('removeRandom',$item->id)}}" method="post">
-                                @csrf
-                                @method('DELETE')
-
-                                <button type="submit"
-                                    onclick="return confirm('Are you sure you want to delete this item?');"
-                                    class="badge  bg-danger-subtle text-dark p-3 border-danger fs-6 fw-bold w-100 text-decoration-none ">Remove
-                                    question from test</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+                </tbody>
+            </table>
         </div>
     </x-panel>
     <x-flash />

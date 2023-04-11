@@ -1,51 +1,60 @@
 <x-layout>
     <x-slot:title>
-        Category
+
+        <h3>All Category</h3>
+        <a class="btn btn-success me-3" href="{{ route('categories.create') }} "> Add New Category</a>
+
     </x-slot:title>
+    <div class="col-11 mx-auto">
+        <table class="table table-bordered table-hover table-light ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">NUmber of Questions</th>
+                    <th scope="col">Actions</th>
 
-    <x-panel class="w-75 mx-auto bg-white pb-5">
-        <div class="d-flex justify-content-between mb-5">
-            <h3>All Category</h3>
-            <a class="btn btn-success me-3" href="{{ route('categories.create') }} "> Add New Category</a>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider border-1">
+                @foreach ($category as $key => $item)
+                    <tr>
+                        <th scope="row">{{ $category->firstItem() + $key }}</th>
+                        <td>{{ $item->name }}</td>
+                        <td>
+                            <p>{{ $item->questions->count() }}</p>
+                        </td>
+                        <td>
+                            <div class="d-flex gap-3 ">
+                                <div>
+                                    <a href="/categories/{{ $item->id }}/edit"
+                                        class="btn btn-warning fw-bold">Edit</a>
+                                </div>
+                                <div>
 
-        </div>
-        <div class="list-group">
+                                    <form class="" action="{{ route('categories.destroy', $item->id) }}"
+                                        method="post">
+                                        @csrf
+                                        @method('DELETE')
 
-            @foreach ($category as $item)
-                <li class="list-group-item list-group-item-action border-bottom border-dark bg-secondary bg-opacity-10 w-75 mx-auto d-flex gap-3 py-3 "
-                    aria-current="true">
+                                        <button type="submit"
+                                            onclick="return confirm('Are you sure you want to delete this item?');"
+                                            class="btn btn-danger fw-bold  text-decoration-none  ">Delete</button>
 
-                    <div class="d-flex gap-2 w-75 justify-content-between">
-                        <div>
+                                    </form>
 
-                            <h6 class="mb-0 ms-2 h6 text-decoration-none fs-3">{{ Str::ucfirst($item->name) }} </h6>
+                                </div>
 
-                        </div>
+                            </div>
+                        </td>
 
-                    </div>
-                    <div class="d-flex flex-row-reverse w-25 gap-3 mx-3 align-items-center">
-                        <div>
+                    </tr>
+                @endforeach
 
-                            <form class="dropdown-item text-center" action="{{ route('categories.destroy', $item->id) }}"
-                                method="post">
-                                @csrf
-                                @method('DELETE')
+            </tbody>
+        </table>
+        {{ $category->links() }}
 
-                                <button type="submit"
-                                    onclick="return confirm('Are you sure you want to delete this item?');"
-                                    class="btn btn-danger fw-bold w-100 text-decoration-none ">Delete</button>
-
-                            </form>
-
-                        </div>
-                        <div>
-                            <a href="/categories/{{ $item->id }}/edit" class="btn btn-warning fw-bold">Edit</a>
-                        </div>
-
-                    </div>
-                </li>
-            @endforeach
-        </div>
-    </x-panel>
+    </div>
     <x-flash />
 </x-layout>

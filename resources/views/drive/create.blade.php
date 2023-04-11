@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:title>
-        Add new drive
+        <h3>Add new drive</h3>
     </x-slot:title>
     <x-panel>
         <div class="d-flex justify-content-between mb-5">

@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:title>
-        Edit Category name
+        <h3>Category</h3>
     </x-slot:title>
     <x-panel class="w-50 mx-auto bg-light">
         <div class="d-flex justify-content-between mb-2 border-bottom pb-3">
@@ -12,7 +12,7 @@
             @csrf
             @method('PATCH')
             <div class="row mb-4">
-                <div class="row mt-5 pt-4">
+                <div class="row mt-4 pt-1">
                     <label for="category" class="ms-3 form-label col">Rename category</label>
                     <input type="text" name="name" id="category" class="form-control w-50 col"
                         value="{{ $category->name }} ">

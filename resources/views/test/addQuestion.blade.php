@@ -1,13 +1,13 @@
 <x-layout>
     <x-slot:title>
-        Add Question
+        <h3>Add Question To Test</h3>
     </x-slot:title>
-    <x-panel>
+    {{-- <x-panel>
         Add a new question form
         <div class="row">
             <h2>Test ID:{{ $test_id }} </h2>
         </div>
-    </x-panel>
+    </x-panel> --}}
     <x-panel class="mt-3  border-2 border-secondary col-9 mx-auto">
 
         <div class="col mb-3">
@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-info">Add Questions</button>
+                            <button type="submit" class="btn btn-success">Add Questions</button>
 
                         </div>
                     </form>

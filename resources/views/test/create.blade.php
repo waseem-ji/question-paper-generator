@@ -1,14 +1,14 @@
 <x-layout>
     <x-slot:title>
-        Tests
+        <h3>Create A Test</h3>
     </x-slot:title>
     <div class="contain">
         <div class="row">
             <div class="col fs-1 mb-4 ">
-                Create A Test
+
             </div>
             <div class="row">
-                <x-panel class="col-10 mx-auto border-3 border-dark">
+                <x-panel class="col-10 mx-auto border-2 border-dark">
                     <form action="{{ route('tests.store') }}" method="POST">
                         @csrf
                         <div class="row mb-4 ms-3">
@@ -26,10 +26,19 @@
                                 </div>
                             </div>
                             <div class="col">
-
+                                <div class="row input-group input-group-lg">
+                                    <label for="duration"
+                                        class="col-auto  input-group-text bg-success bg-opacity-25 border-0 ">Test
+                                        Duration</label>
+                                    <input type="text" id="duration" name="duration"
+                                        class="col-3 form-control rounded-end border-1 " placeholder="Enter duration in minutes">
+                                    @error('duration')
+                                        <span class="text-danger fs-6">{{ $message }} </span>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
-                        <div class="row mb-4 ms-3">
+                        {{-- <div class="row mb-4 ms-3">
                             <div class="col">
                                 <div class="row input-group input-group-lg">
                                     <label for="duration"
@@ -45,7 +54,7 @@
                             <div class="col">
 
                             </div>
-                        </div>
+                        </div> --}}
                         {{-- INstruction --}}
                         <div class="row mb-3">
                             <div class="col-11 mx-auto">

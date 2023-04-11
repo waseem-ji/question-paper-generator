@@ -1,30 +1,46 @@
 <x-drive-layout>
+    <x-slot:details>
+        <div class="py-2 px-0">
+            <div class="container d-flex justify-content-between align-items-center">
+                <div class="row">
+                    <div class="col-auto fw-bold p-0">Drive Name:</div>
+                    <div class="col p-0 ms-2"><a class="text-decoration-none" href="{{route('drives.show',$driveTest->drive->id)}}">{{$driveTest->drive->name}}</a> </div>
+                </div>
+                <div class="row">
+                    <div class="col-auto fw-bold p-0">Test Name:</div>
+                    <div class="col  p-0 ms-2">{{ $driveTest->test->name }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-auto fw-bold p-0">Drive Date:</div>
+                    <div class="col p-0 ms-2">{{ date('d-m-Y', strtotime($driveTest->drive->created_at)) }}</div>
+                </div>
+                <div class="row ">
+                    <div class="col-auto fw-bold p-0">Drive Type:</div>
+                    <div class="col p-0 ms-2">{{ $driveTest->drive->drive_type }}</div>
+                </div>
+                <div class="row align-middle">
+
+                </div>
+            </div>
+        </div>
+    </x-slot:details>
     <x-slot:navItem>
         <li class="nav-item ">
-            <a class="nav-link active px-5" aria-current="page" href="{{ route('driveTest', $driveTest->id) }}">Question Paper</a>
+            <a class="nav-link active px-5" aria-current="page" href="{{ route('driveTest', $driveTest->id) }}">Question
+                Paper</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link px-5" href="{{route('driveTest.tokens',$driveTest->id)}}">Tokens</a>
+            <a class="nav-link px-5" href="{{ route('driveTest.tokens', $driveTest->id) }}">Tokens</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link px-5" href="#">Candidates</a>
+            <a class="nav-link px-5" href="{{route('driveTest.candidates',$driveTest->id)}}">Candidates</a>
         </li>
     </x-slot:navItem>
     {{-- Can include the test paper here in the info page --}}
     <div class="container">
+        <x-panel class="mt-2 mb-5 border-0  bg-light">
         <div class="row">
             <div class="col">
-                <x-panel class="mt-2 mb-5 border-0  bg-white">
-                    <x-panel class="bg-white">
-                        <h3> Test Name: {{ $driveTest->test->name }} </h3>
-                        <h4 class="mb-0">Drive Name: <a class="text-decoration-none" href="{{route('showDriveTests',$driveTest->drive->id)}} ">{{ $driveTest->drive->name }}</a> </h4>
-                        <p class="mb-0">Drive Date: {{ date('d-m-Y', strtotime($driveTest->drive->created_at)) }} </p>
-                        <p class="">Drive Type: {{ $driveTest->drive->drive_type }} </p>
-                    </x-panel>
-
-                    <div class="d-flex justify-content-between mb-5">
-
-                    </div>
 
                     @php
                         $questions = $driveTest->test->specific_questions;
@@ -99,23 +115,31 @@
                         </div>
                     @endforeach
 
-                    <div class="row">
-                        @foreach ($random as $item)
-                            <div class="col-sm-6 col-lg-3 p-4 mb-3">
-                                <div class="card bg-success-subtle  rounded-3 border-success">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Category : {{ $item->category->name }}</h5>
-                                        <p class="card-text fs-5">Difficulty : {{ $item->difficulty }} </p>
-                                        <p class="card-text">Number of questions : {{ $item->number_of_questions }}
-                                        </p>
-
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </x-panel>
+                </div>
             </div>
-        </div>
+            <div class="row">
+                <table class=" table table-bordered table-hover table-light ">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Difficulty</th>
+                            <th scope="col">Number of questions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider border-2">
+                        @foreach ($random as $item)
+                            <tr>
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $item->category->name }}</td>
+                                <td>{{ $item->difficulty }}</td>
+                                <td>{{ $item->number_of_questions }}</td>
+                            </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+            </div>
+        </x-panel>
     </div>
 </x-drive-layout>

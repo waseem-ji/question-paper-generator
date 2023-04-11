@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Candidate;
 use App\Models\Drive;
 use App\Models\DriveTest;
 use Illuminate\Http\Request;
@@ -15,8 +16,8 @@ class DriveController extends Controller
      */
     public function index()
     {
-        $drives = Drive::all();
-        return view('drive.index',compact(['drives']));
+        $drives = Drive::paginate(10);
+        return view('drive.index', compact(['drives']));
     }
 
     /**
@@ -37,7 +38,6 @@ class DriveController extends Controller
      */
     public function store()
     {
-
         request()->validate([
             'name' => 'required',
             'drive_type' => 'required'
@@ -59,8 +59,8 @@ class DriveController extends Controller
      */
     public function show(Drive $drive)
     {
-
-        return view('drive.show',compact(['drive']));
+        $driveTests = DriveTest::where('drive_id', $drive->id)->paginate(10);
+        return view('drive.allTests', compact(['driveTests','drive']));
     }
 
     /**
@@ -71,7 +71,7 @@ class DriveController extends Controller
      */
     public function edit(Drive $drive)
     {
-        return view('drive.edit',compact(['drive']));
+        return view('drive.edit', compact(['drive']));
     }
 
     /**
@@ -93,7 +93,7 @@ class DriveController extends Controller
             'drive_type' =>request()->drive_type
         ]);
 
-        return redirect(route('drives.index'))->with('info','Drive Edited');
+        return redirect(route('drives.index'))->with('info', 'Drive Edited');
     }
 
     /**
@@ -105,12 +105,19 @@ class DriveController extends Controller
     public function destroy(Drive $drive)
     {
         $drive->delete();
-        return redirect(route('drives.index') )->with('danger', 'Drive Archived Succesfully');
+        return redirect(route('drives.index'))->with('danger', 'Drive Archived Succesfully');
     }
 
     public function showTests(Drive $drive)
     {
-        $driveTests = DriveTest::where('drive_id',$drive->id)->get();
-        return view('drive.allTests',compact(['driveTests','drive']));
+        $driveTests = DriveTest::where('drive_id', $drive->id)->paginate(10);
+        return view('drive.allTests', compact(['driveTests','drive']));
+    }
+
+    public function showCandidates(Drive $drive)
+    {
+        $candidates = Candidate::where('drive_id', $drive->id)->paginate(10);
+
+        return view('drive.allCandidates', compact(['candidates','drive']));
     }
 }

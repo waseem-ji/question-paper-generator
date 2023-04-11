@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:title>
-        View Question
+        <h3>View Question</h3>
     </x-slot:title>
     <x-panel>
 

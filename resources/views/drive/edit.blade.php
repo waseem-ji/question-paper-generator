@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:title>
-        Edit Drive Details
+        <h3> Edit Drive Details</h3>
     </x-slot:title>
     <x-panel class="w-75 mx-auto border-3 border-secondary">
         <form action="{{ route('drives.update',$drive->id) }} " method="post">

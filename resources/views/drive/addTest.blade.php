@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:title>
-        Add Test to drive
+        <h3>Add Test to drive</h3>
     </x-slot:title>
     <x-panel>
 

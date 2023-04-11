@@ -2,7 +2,7 @@
     <x-slot:title>
         <h3>Edit Administrator Details</h3>
     </x-slot:title>
-    <x-panel class="w-50 mx-auto bg-light">
+    <x-panel class="col-8 mx-auto bg-light border-0">
         <div class=" pb-3">
 
         </div>
