@@ -19,7 +19,7 @@ class CandidateTest extends Model
     }
     public function candidate()
     {
-        return $this->hasMany(Candidate::class);
+        return $this->belongs(Candidate::class);
     }
 
     public function test()
