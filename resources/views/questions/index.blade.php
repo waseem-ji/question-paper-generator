@@ -3,11 +3,11 @@
         <h3>All Questions</h3>
         <a class="btn btn-success me-3" href="/questions/create">Add New Question</a>
     </x-slot:title>
-    <div>
-        <table class="table table-bordered table-hover table-light ">
+    <div class="container bg-light p-3 rounded-3">
+        <table id="questionTable" class="table table-bordered table-hover table-light py-3">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    {{-- <th scope="col">#</th> --}}
                     <th scope="col">Question</th>
                     <th scope="col">Category</th>
                     <th scope="col">Difficulty</th>
@@ -19,7 +19,7 @@
             <tbody class="table-group-divider border-1">
                 @foreach ($questions as $key=>$question)
                     <tr>
-                        <th scope="row">{{ $questions->firstItem()+$key }}</th>
+                        {{-- <th scope="row">{{ $questions->firstItem()+$key }}</th> --}}
                         <td>{{ $question->question }}</td>
                         <td>{{ $question->category->name }}</td>
                         <td>{{ $question->difficulty }}</td>
@@ -56,7 +56,7 @@
 
             </tbody>
         </table>
-        {{ $questions->links()}}
+        {{-- {{ $questions->links()}} --}}
 
     </div>
     <x-flash />
