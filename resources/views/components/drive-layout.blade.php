@@ -61,19 +61,21 @@
                                 Dashboard
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="feather feather-file align-text-bottom" aria-hidden="true">
-                                    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
-                                    <polyline points="13 2 13 9 20 9"></polyline>
-                                </svg>
-                                Admin
-                                {{-- For admin only to see users with other roles --}}
-                            </a>
-                        </li>
+                        @can('superAdmin')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.index') }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-file align-text-bottom" aria-hidden="true">
+                                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                        <polyline points="13 2 13 9 20 9"></polyline>
+                                    </svg>
+                                    Admin
+                                    {{-- For admin only to see users with other roles --}}
+                                </a>
+                            </li>
+                        @endcan
                         <li class="nav-item">
                             <a class="nav-link" href="/questions">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -222,11 +224,16 @@
             </nav>
 
             <main class="col-md-9 col-lg-10  bg-primary bg-opacity-10 px-0 ">
-                <div class="bg-white pt-2 mb-4">
+                <div class="bg-white mb-4">
                     <div class="nav-scroller bg-body  ">
+                        <div class="row-10">
+                            {{ $details }}
+                            <div>
+                            </div>
+                        </div>
                         <ul class="nav nav-tabs">
-                            
-                            {{$navItem}}
+
+                            {{ $navItem }}
                         </ul>
                     </div>
                 </div>

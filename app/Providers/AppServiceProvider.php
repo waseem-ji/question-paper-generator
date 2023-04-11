@@ -28,11 +28,12 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrapFive();
 
-        Gate::define('admin',function(User $user){
+        Gate::define('administrator', function (User $user) {
+            return $user->role === 'admin' || $user->role === 'hr';
+        });
+
+        Gate::define('superAdmin', function (User $user) {
             return $user->role === 'admin';
-         });
-        Gate::define('hr',function(User $user){
-            return $user->role === 'hr';
-         });
+        });
     }
 }

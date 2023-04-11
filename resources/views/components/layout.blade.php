@@ -61,8 +61,9 @@
                                 Dashboard
                             </a>
                         </li>
+                        @can('superAdmin')
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{route('admin.index')}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round"
@@ -74,6 +75,7 @@
                                 {{-- For admin only to see users with other roles --}}
                             </a>
                         </li>
+                        @endcan
                         <li class="nav-item">
                             <a class="nav-link" href="/questions">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -232,7 +234,7 @@
                 </div>
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-5 border-bottom border-4">
-                    <h1 class="h2"> {{ Str::upper($title) }} </h1>
+                     {{ $title }}
 
                 </div>
 

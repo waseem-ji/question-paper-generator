@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddQuestionController;
 use App\Http\Controllers\AddTestController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Candidate\CandidateController;
 use App\Http\Controllers\CategoryController;
@@ -32,13 +33,14 @@ Route::post('/login', [LoginController::class,'store']);        //Should we rena
 Route::get('logout', [LoginController::class,'logout']);
 
 
-Route::middleware(['auth','can:admin'])->group( function() {
+Route::middleware(['auth','can:administrator'])->group(function () {
     Route::view('/dashboard', 'dashboard');
     Route::resource('/questions', QuestionController::class);
 
     Route::resource('/categories', CategoryController::class)->except(['show']);
 
-    Route::get('drives/{drive}/tests', [DriveController::class,'showTests'])->name('showDriveTests');
+    Route::get('drives/{drive}/tests', [DriveController::class,'showTests'])->name('drives.tests');
+    Route::get('drives/{drive}/candidates', [DriveController::class,'showCandidates'])->name('drives.candidates');
     Route::resource('/drives', DriveController::class);
 
     Route::resource('/tests', TestController::class);
@@ -57,9 +59,14 @@ Route::middleware(['auth','can:admin'])->group( function() {
     Route::delete('removeTest/{driveTest}', [AddTestController::class,'destroy'])->name('removeTest');
 
     Route::post('{driveTest}/generateToken', [TestTokenController::class,'generateToken'])->name('generateToken');
-    
+
     Route::get('driveTest/tokens/{driveTest}', [DriveTestController::class,'viewTokens'])->name('driveTest.tokens');
+    Route::get('driveTest/candidates/{driveTest}', [DriveTestController::class,'viewCandidates'])->name('driveTest.candidates');
     Route::get('driveTest/{driveTest}', [DriveTestController::class,'index'])->name('driveTest');
+});
+
+Route::middleware(['auth','can:superAdmin'])->group(function () {
+    Route::resource('admin', AdminController::class)->except('show');
 });
 
 //Candidate routes
@@ -69,10 +76,8 @@ Route::prefix('candidate')->group(function () {
     Route::post('login', [CandidateController::class,'verifyToken'])->name('candidate.verifyToken');
     Route::get('email/{token}', [CandidateController::class,'emailView'])->name('candidate.email');
     Route::post('email', [CandidateController::class,'checkEmail'])->name('candidate.verifyEmail');
-    Route::get('register/{candidate}',[CandidateController::class,'registerView'])->name('candidate.create');
-    Route::post('register/{candidate}',[CandidateController::class,'register'])->name('candidate.register');
+    Route::get('register/{candidate}', [CandidateController::class,'registerView'])->name('candidate.create');
+    Route::post('register/{candidate}', [CandidateController::class,'register'])->name('candidate.register');
     Route::get('edit/{candidate}', [CandidateController::class,'edit'])->name('candidate.edit');
-    Route::patch('update/{candidate}',[CandidateController::class,'update'])->name('candidate.update');
+    Route::patch('update/{candidate}', [CandidateController::class,'update'])->name('candidate.update');
 });
-
-
