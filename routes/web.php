@@ -5,6 +5,7 @@ use App\Http\Controllers\AddTestController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Candidate\CandidateController;
+use App\Http\Controllers\Candidate\ExamController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DriveController;
 use App\Http\Controllers\DriveTestController;
@@ -80,4 +81,8 @@ Route::prefix('candidate')->group(function () {
     Route::post('register/{candidate}', [CandidateController::class,'register'])->name('candidate.register');
     Route::get('edit/{candidate}', [CandidateController::class,'edit'])->name('candidate.edit');
     Route::patch('update/{candidate}', [CandidateController::class,'update'])->name('candidate.update');
+
+    //Route or controller to add details to candidate_Tests table Then we can pass candidate_table id
+    Route::get('loadExam/{candidate}',[ExamController::class,'processExam'])->name('candidate.loadExam');
+    Route::get('exam/{candidateTest}',[ExamController::class,'loadExam'])->name('candidate.exam');
 });

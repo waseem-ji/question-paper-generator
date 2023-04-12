@@ -37,6 +37,9 @@ class CandidateController extends Controller
         if ($tokenData === 1) {
             return redirect()->back()->withErrors(['error' => 'The access Code has expired ']);
         }
+        // Store the token value in the session
+        session(['testId' => $tokenData->driveTest->test_id]);
+        session(['driveTestId' => $tokenData->drive_test_id]);
         return redirect(route('candidate.email', $tokenData));
     }
 

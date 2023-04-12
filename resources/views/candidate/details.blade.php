@@ -7,7 +7,8 @@
                     <div class="col-md-6 col-sm-10 shadow-sm p-5 bg-light rounded-4">
                         <div class="text-center">
                             <h3 class="text-primary">Verify Your Details</h3>
-                            <small class="text-muted">Please make sure there are no mistakes before you proceed for the test </small>
+                            <small class="text-muted">Please make sure there are no mistakes before you proceed for the
+                                test </small>
                         </div>
                         <div class="mt-3">
                             <table class="table table-bordered table-hover table-light ">
@@ -16,7 +17,6 @@
                                     {{-- <th scope="col">#</th> --}}
                                     <th scope="col">Name</th>
                                     <td>{{ $candidate['name'] }}</td>
-
 
                                 </tr>
 
@@ -41,7 +41,8 @@
                                 class="btn btn-primary text-center mt-4 col-auto px-5" type="button">
                                 Edit
                             </a>
-                            <a class="btn btn-success text-center mt-4 col-auto px-3" type="button">
+                            <a href="{{route('candidate.loadExam',$candidate['id'])}}"
+                            class="btn btn-success text-center mt-4 col-auto px-3" type="button">
                                 Proceed to Test
                             </a>
 
@@ -52,7 +53,5 @@
         </div>
 
     </body>
-
-
 
 </x-candidate-layout>
