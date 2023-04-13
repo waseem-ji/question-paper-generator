@@ -16,6 +16,7 @@ class ExamController extends Controller
         $questionsArray = array();
 
         $test =  Test::where('id', $testId)->first();
+        // dd($testId);
         $specificQuestions = $test->specific_questions;
         foreach ($specificQuestions as $item) {
             $questionsArray[] = $item->question_id;
@@ -45,7 +46,8 @@ class ExamController extends Controller
     public function processExam(Candidate $candidate)
     {
         $testId = session('testId');
-        // call a function to get questions for the test returned as json format
+        // dd("asdas");
+
         $questions = json_encode($this->getQuestions($testId));
         // dd($questions);
         $candidateTest = CandidateTest::create([
@@ -55,19 +57,54 @@ class ExamController extends Controller
             'drive_test_id' => session('driveTestId')
         ]);
 
-        // dd($candidateTest);
-        return redirect(route('candidate.exam',$candidateTest));
+        session(['candidateTestId' => $candidateTest->id]);
+        return redirect(route('candidate.exam', $candidateTest));
     }
 
 
     public function loadExam(CandidateTest $candidateTest)
     {
-
         $questionsArray = json_decode($candidateTest->question_paper);
-        $questions = Question::whereIn('id',$questionsArray)->simplePaginate(1);
-        // $questions = Question::whereIn('id',$questionsArray)->paginate(1);
-        // dd($questions);
+        $questions = Question::whereIn('id', $questionsArray)->get();
+        // session(['time' => $candidateTest->test->duration]);
 
-        return view('candidate.exam',compact(['questions']));
+        return view('candidate.exam', compact(['questions','candidateTest']));
+    }
+
+    public function saveAnswer(Request $request)
+    {
+        $candidateTestId = session('candidateTestId');
+        $candidateTest = CandidateTest::find($candidateTestId);
+
+        $results = $request->response;
+        // dd($results);
+
+        $candidateTest->update([
+            'response' => $results
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'data' => $results
+        ]);
+        // return ($candidateId);
+    }
+
+    public function submitExam(CandidateTest $candidateTest)
+    {
+        return view('candidate.finish', compact(['candidateTest']));
+    }
+
+    public function feedback(Request $request, CandidateTest $candidateTest)
+    {
+        $request->validate([
+            'feedback' => 'required'
+        ]);
+
+        $candidateTest->update([
+            'feedback' => $request->feedback
+        ]);
+
+        return redirect(route('candidate.login'));
     }
 }

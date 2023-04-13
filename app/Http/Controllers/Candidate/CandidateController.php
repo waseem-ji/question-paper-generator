@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Candidate;
 use App\Models\TestToken;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 
 class CandidateController extends Controller
@@ -40,6 +41,11 @@ class CandidateController extends Controller
         // Store the token value in the session
         session(['testId' => $tokenData->driveTest->test_id]);
         session(['driveTestId' => $tokenData->drive_test_id]);
+        //Create a response instance
+        $response = new Response('Hello World');
+
+        //Call the withCookie() method with the response method
+        // session(['tokenId' => $tokenData->id]);
         return redirect(route('candidate.email', $tokenData));
     }
 
@@ -111,7 +117,6 @@ class CandidateController extends Controller
             'phone' => $request->phone_number,
             'position' => $request->position
         ]);
-
         return view('candidate.details', compact(['candidate']));
     }
 }

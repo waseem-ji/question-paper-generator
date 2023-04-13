@@ -85,4 +85,8 @@ Route::prefix('candidate')->group(function () {
     //Route or controller to add details to candidate_Tests table Then we can pass candidate_table id
     Route::get('loadExam/{candidate}',[ExamController::class,'processExam'])->name('candidate.loadExam');
     Route::get('exam/{candidateTest}',[ExamController::class,'loadExam'])->name('candidate.exam');
+
+    Route::post('save-answer',[ExamController::class,'saveAnswer']);
+    Route::get('submit/{candidateTest}',[ExamController::class,'submitExam']);
+    Route::post('submit/{candidateTest}',[ExamController::class,'feedback'])->name('candidate.feedback');
 });
