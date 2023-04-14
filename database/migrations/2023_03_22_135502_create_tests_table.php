@@ -16,7 +16,7 @@ class CreateTestsTable extends Migration
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->time('duration')->nullable();
+            $table->integer('duration')->nullable();
             $table->longText('instructions');
             $table->timestamps();
             $table->softDeletes(); //Would it be better if didnot softdelete this ?

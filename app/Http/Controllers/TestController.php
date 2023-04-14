@@ -39,13 +39,15 @@ class TestController extends Controller
         request()->validate([
             'name' => 'required',
             'instructions' => 'required',
-            // 'duration' => ['required','numeric']
+            'duration' => ['required','numeric']
 
         ]);
-
+        $duration = request()->duration * 60;
         Test::create([
             'name' => request()->name,
-            'instructions' => request()->instructions
+            'instructions' => request()->instructions,
+            'duration' => $duration
+
         ]);
 
         return redirect(route('tests.index'))->with('success','New test created');
