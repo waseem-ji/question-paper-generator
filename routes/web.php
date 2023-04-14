@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Candidate\CandidateController;
 use App\Http\Controllers\Candidate\ExamController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DriveController;
 use App\Http\Controllers\DriveTestController;
 use App\Http\Controllers\QuestionController;
@@ -35,7 +36,7 @@ Route::get('logout', [LoginController::class,'logout']);
 
 
 Route::middleware(['auth','can:administrator'])->group(function () {
-    Route::view('/dashboard', 'dashboard');
+    Route::get('/dashboard', [DashboardController::class,'show']);
     Route::resource('/questions', QuestionController::class);
 
     Route::resource('/categories', CategoryController::class)->except(['show']);
@@ -83,10 +84,10 @@ Route::prefix('candidate')->group(function () {
     Route::patch('update/{candidate}', [CandidateController::class,'update'])->name('candidate.update');
 
     //Route or controller to add details to candidate_Tests table Then we can pass candidate_table id
-    Route::get('loadExam/{candidate}',[ExamController::class,'processExam'])->name('candidate.loadExam');
-    Route::get('exam/{candidateTest}',[ExamController::class,'loadExam'])->name('candidate.exam');
+    Route::get('loadExam/{candidate}', [ExamController::class,'processExam'])->name('candidate.loadExam');
+    Route::get('exam/{candidateTest}', [ExamController::class,'loadExam'])->name('candidate.exam');
 
-    Route::post('save-answer',[ExamController::class,'saveAnswer']);
-    Route::get('submit/{candidateTest}',[ExamController::class,'submitExam']);
-    Route::post('submit/{candidateTest}',[ExamController::class,'feedback'])->name('candidate.feedback');
+    Route::post('save-answer', [ExamController::class,'saveAnswer']);
+    Route::get('submit/{candidateTest}', [ExamController::class,'submitExam']);
+    Route::post('submit/{candidateTest}', [ExamController::class,'feedback'])->name('candidate.feedback');
 });

@@ -1,7 +1,7 @@
 <x-layout>
-<x-slot:title>
-   <h3>Dashboard</h3>
-</x-slot:title>
+    <x-slot:title>
+        <h3>Dashboard</h3>
+    </x-slot:title>
     <div class="row">
 
         <!-- Earnings (Monthly) Card Example -->
@@ -12,7 +12,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Question Bank</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">1834<span
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $questionNumber }}<span
                                     class=" ms-2 lead">Questions</span></div>
                         </div>
                         <div class="col-auto">
@@ -31,7 +31,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Tests (Combined)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">215</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $testNumber }} </div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -51,14 +51,15 @@
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $drives->count() }}
+                                    </div>
                                 </div>
-                                <div class="col">
+                                {{-- <div class="col">
                                     <div class="progress progress-sm mr-2">
                                         <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
                                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="col-auto">
@@ -101,17 +102,42 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-area">
-                        <div class="chartjs-size-monitor">
+                        <div>
+                            <table class="table table-bordered table-hover table-light ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col"> Drive Type</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody class="table-group-divider border-1">
+                                    @foreach ($drives as $key => $drive)
+                                        <tr>
+                                            <th scope="row">{{ $drives->firstItem() + $key }}</th>
+                                            <td>{{ $drive->name }}</td>
+                                            <td>{{ $drive->drive_type }}</td>
+
+                                        </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                            {{ $drives->links() }}
+
+                        </div>
+                        {{-- <div class="chartjs-size-monitor">
                             <div class="chartjs-size-monitor-expand">
-                                <div class=""></div>
+                                <div class="">asads</div>
                             </div>
                             <div class="chartjs-size-monitor-shrink">
-                                <div class=""></div>
+                                <div class="">ljlknl</div>
                             </div>
-                        </div>
-                        <canvas id="myAreaChart" width="1778" height="640"
+                        </div> --}}
+                        {{-- <canvas id="myAreaChart" width="1778" height="640"
                             style="display: block; height: 320px; width: 889px;"
-                            class="chartjs-render-monitor"></canvas>
+                            class="chartjs-render-monitor"></canvas> --}}
                     </div>
                 </div>
             </div>
