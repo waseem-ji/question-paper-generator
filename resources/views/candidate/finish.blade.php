@@ -38,4 +38,15 @@
 
     </body>
     <x-flash />
+    <script>
+        // Disable the browser's back button
+        window.history.replaceState(null, null, window.location.href);
+        document.addEventListener("keydown", function(event) {
+            if (event.keyCode === 8) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    </script>
+
 </x-candidate-layout>
