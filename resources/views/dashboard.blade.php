@@ -7,12 +7,12 @@
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary h-100 py-2">
-                <div class="card-body">
+                <div class="card-body pt-2">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            <div class="text-xs fw-bold text-primary text-uppercase mb-3 fs-5">
                                 Question Bank</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $questionNumber }}<span
+                            <div class="h5 mb-0 fw-bold text-gray-800">{{ $questionNumber }}<span
                                     class=" ms-2 lead">Questions</span></div>
                         </div>
                         <div class="col-auto">
@@ -26,12 +26,12 @@
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-success  h-100 py-2">
-                <div class="card-body">
+                <div class="card-body pt-2">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            <div class="text-xs fw-bold text-success text-uppercase mb-3 fs-5">
                                 Tests (Combined)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $testNumber }} </div>
+                            <div class="h5 mb-0 fw-bold text-gray-800">{{ $testNumber }} </div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -44,14 +44,14 @@
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-info h-100 py-2">
-                <div class="card-body">
+                <div class="card-body pt-2">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Drives
+                            <div class="text-xs fw-bold text-info text-uppercase mb-3 fs-5">Drives
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $drives->count() }}
+                                    <div class="h5 mb-0 mr-3 fw-bold text-gray-800">{{ $drives->count() }}
                                     </div>
                                 </div>
                                 {{-- <div class="col">
@@ -73,12 +73,12 @@
         <!-- Pending Requests Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-warning h-100 py-2">
-                <div class="card-body">
+                <div class="card-body pt-2">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            <div class="text-xs fw-bold text-warning text-uppercase mb-3 fs-5">
                                 Pending Evaluation</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                            <div class="h5 mb-0 fw-bold text-gray-800">18</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -96,7 +96,7 @@
             <div class="card mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Current Drives</h6>
+                    <h6 class="m-0 fw-bold text-primary">Current Drives</h6>
 
                 </div>
                 <!-- Card Body -->
@@ -148,7 +148,7 @@
             <div class="card  mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Announcements</h6>
+                    <h6 class="m-0 fw-bold text-primary">Announcements</h6>
 
                 </div>
                 <!-- Card Body -->

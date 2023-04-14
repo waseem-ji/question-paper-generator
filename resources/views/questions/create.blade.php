@@ -1,9 +1,9 @@
 <x-layout>
     <x-slot:title>
-       <h3>Add a new Question</h3>
+        <h3>Add a new Question</h3>
     </x-slot:title>
 
-    <div class="col-8 mx-auto">
+    <div class="col-11 mx-auto">
         <x-panel class="bg-light">
             <form action="/questions" method="post">
                 @csrf
@@ -73,6 +73,9 @@
                     </div>
                 </div>
                 <div class="row">
+                    @error('correct_option')
+                        <p class="text-danger"> {{ $message }}</p>
+                    @enderror
                     <div class="d-flex justify-content-between">
                         <a href="/questions" class="mt-3 text-decoration-none btn btn-danger ">Cancel</a>
                         <button type="submit" class="btn btn-success mt-3 me-4">Submit</button>
@@ -107,9 +110,13 @@
 
                 var optionHtml = `
             <div class="form-group option-group my-2 row">
-                <input type="text" class="form-control col mx-3 text-end bg-transparent border-0" name="choice[${optionIndex}][text]" placeholder="${optionIndex}" disabled>
+                <input type="text" class="form-control mx-3 text-end bg-transparent border-0" name="choice[${optionIndex}][text]" placeholder="${optionIndex}" disabled style="width:10%">
                 <input type="text" class="form-control col mx-3" name="choice[${optionIndex}]" placeholder="Option value">
                 <button type="button" class=" col btn btn-danger remove-option-btn mx-3">Remove</button>
+                <div class="col p-2">
+                <input type="radio" name="correct_option" id="correctOption" class="ms-5 me-2" value="${optionIndex}" >
+                <label for="correctOption" class="fw-bold">Mark as Correct Option</label>
+                </div>
             </div>`;
                 $('#optionContainer').append(optionHtml);
             });
@@ -119,5 +126,10 @@
             });
         });
     </script>
+    <style>
+        input[type='radio'] {
+            transform: scale(2);
+        }
+    </style>
 
 </x-layout>

@@ -11,7 +11,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">NUmber of Questions</th>
+                    <th scope="col">Number of Questions</th>
                     <th scope="col">Actions</th>
 
                 </tr>

@@ -20,6 +20,7 @@ class CreateQuestionsTable extends Migration
             $table->string('difficulty');
             $table->string('type');
             $table->json('choice')->nullable();
+            $table->string('correct_option')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

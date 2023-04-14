@@ -46,7 +46,9 @@ class QuestionController extends Controller
 
         if (isset(request()->choice)) {
             request()->choice = json_encode(request()->choice);
+            request()->validate(['correct_option' => 'required']);
             $attributes['choice'] = request()->choice;
+            $attributes['correct_option'] =request()->correct_option ;
         }
 
 
@@ -55,7 +57,8 @@ class QuestionController extends Controller
             'difficulty' => $attributes['difficulty'],
             'type' => $attributes['type'],
             'category_id'=>$attributes['category_id'],
-            'choice' =>$attributes['choice']??null
+            'choice' =>$attributes['choice']??null,
+            'correct_option' => $attributes['correct_option'] ?? null
         ]);
 
         return redirect('/questions')->with('success', 'New question added');
@@ -98,12 +101,14 @@ class QuestionController extends Controller
             'question' => 'required',
             'difficulty' => 'required',
             'type' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required',
         ]);
 
         if (isset(request()->choice)) {
             request()->choice = json_encode(request()->choice);
+            request()->validate(['correct_option' => 'required']);
             $attributes['choice'] = request()->choice;
+            $attributes['correct_option'] =request()->correct_option ;
         }
 
         $question->update([
@@ -111,7 +116,8 @@ class QuestionController extends Controller
             'difficulty' => $attributes['difficulty'],
             'type' => $attributes['type'],
             'category_id'=>$attributes['category_id'],
-            'choice' =>$attributes['choice']??null
+            'choice' =>$attributes['choice']??null,
+            'correct_option' => $attributes['correct_option'] ?? null
         ]);
 
         return redirect('/questions')->with('info', 'New question added');

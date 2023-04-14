@@ -57,20 +57,33 @@
                             </a>
                         </li>
                         @can('superAdmin')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.index') }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase">
+                                        <rect x="2" y="7" width="20" height="14" rx="2"
+                                            ry="2"></rect>
+                                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                    </svg>
+                                    Admin
+                                    {{-- For admin only to see users with other roles --}}
+                                </a>
+                            </li>
+                        @endcan
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('admin.index')}}">
+                            <a class="nav-link" href="/categories">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="feather feather-file align-text-bottom" aria-hidden="true">
-                                    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
-                                    <polyline points="13 2 13 9 20 9"></polyline>
+                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-clipboard">
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2">
+                                    </path>
+                                    <rect x="8" y="2" width="8" height="4" rx="1"
+                                        ry="1"></rect>
                                 </svg>
-                                Admin
-                                {{-- For admin only to see users with other roles --}}
+                                Question Category
                             </a>
                         </li>
-                        @endcan
                         <li class="nav-item">
                             <a class="nav-link" href="/questions">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -82,19 +95,6 @@
                                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                                 </svg>
                                 Question Bank
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/categories">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="feather feather-shopping-cart align-text-bottom" aria-hidden="true">
-                                    <circle cx="9" cy="21" r="1"></circle>
-                                    <circle cx="20" cy="21" r="1"></circle>
-                                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                                </svg>
-                                Question Category
                             </a>
                         </li>
                         <li class="nav-item">
@@ -116,10 +116,13 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round"
-                                    class="feather feather-bar-chart-2 align-text-bottom" aria-hidden="true">
-                                    <line x1="18" y1="20" x2="18" y2="10"></line>
-                                    <line x1="12" y1="20" x2="12" y2="4"></line>
-                                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                                    class="feather feather-hard-drive">
+                                    <line x1="22" y1="12" x2="2" y2="12"></line>
+                                    <path
+                                        d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z">
+                                    </path>
+                                    <line x1="6" y1="16" x2="6.01" y2="16"></line>
+                                    <line x1="10" y1="16" x2="10.01" y2="16"></line>
                                 </svg>
                                 Drives
                             </a>
@@ -229,7 +232,7 @@
                 </div>
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-5 border-bottom border-4">
-                     {{ $title }}
+                    {{ $title }}
 
                 </div>
 
@@ -243,7 +246,7 @@
         integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
     </script>
 
-    <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"> </script>
+    <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script>
         let table = new DataTable('#questionTable');
     </script>
