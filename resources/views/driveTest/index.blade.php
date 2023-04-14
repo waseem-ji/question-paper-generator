@@ -39,10 +39,10 @@
         </li>
     </x-slot:navItem>
     {{-- Can include the test paper here in the info page --}}
-    <div class="container">
-        <x-panel class="mt-2 mb-5 border-0  bg-light">
+    <div class="container-fluid">
+        <div class="row mt-2 mb-5 border-0  bg-light mx-2 p-3">
 
-            <div class="row">
+            <div class="col">
                 <h3>Specific Questions</h3>
                 <table id="questionTable" class="table table-bordered table-hover table-light py-3">
                     @php
@@ -63,7 +63,7 @@
                         @foreach ($questions as $key => $question)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td style="width:60%;">{{ $question->question->question }}</td>
+                                <td>{{ $question->question->question }}</td>
                                 @isset($question->question->choice)
                                     <div class="list-group">
                                         <div class="d-flex gap-2 w-100 justify-content-between">
@@ -97,7 +97,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="row mt-4">
+            <div class="row mt-4 mx-auto">
                 <h3>Random Questions</h3>
                 <table class=" table table-bordered table-hover table-light ">
                     <thead>
@@ -121,6 +121,6 @@
                     </tbody>
                 </table>
             </div>
-        </x-panel>
+        </div>
     </div>
 </x-drive-layout>

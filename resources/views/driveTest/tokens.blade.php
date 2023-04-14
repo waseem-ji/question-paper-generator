@@ -38,17 +38,9 @@
             <a class="nav-link px-5" href="{{ route('driveTest.candidates', $driveTest->id) }}">Candidates</a>
         </li>
     </x-slot:navItem>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col">
-                {{-- <x-panel class="bg-white mb-3">
-                    <h3> Test Name: {{ $driveTest->test->name }} </h3>
-                    <h4 class="mb-0">Drive Name: <a class="text-decoration-none"
-                            href="{{ route('drives.tests', $driveTest->drive->id) }} ">{{ $driveTest->drive->name }}</a>
-                    </h4>
-                    <p class="mb-0">Drive Date: {{ date('d-m-Y', strtotime($driveTest->drive->created_at)) }} </p>
-                    <p class="">Drive Type: {{ $driveTest->drive->drive_type }} </p>
-                </x-panel> --}}
                 <x-panel class="bg-light rounded-1 col-7 mx-auto">
                     <div class="ms-5">
                         <form action="{{ route('generateToken', $driveTest->id) }}" class="mt-3" method="POST">

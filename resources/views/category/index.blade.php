@@ -5,7 +5,7 @@
         <a class="btn btn-success me-3" href="{{ route('categories.create') }} "> Add New Category</a>
 
     </x-slot:title>
-    <div class="col-11 mx-auto">
+    <div class="col">
         <table class="table table-bordered table-hover table-light ">
             <thead>
                 <tr>

@@ -5,7 +5,7 @@
 @endphp --}}
     <div class="position-relative">
         <div id="timer" class="position-absolute top-0 end-0 px-4 py-3  text-center fs-4 mb-4 bg-danger fw-bold"
-            style="margin-right:280px; width:10%"></div>
+            style="margin-right:280px; width:10%; height:70px"></div>
 
     </div>
     <div>
@@ -17,8 +17,8 @@
                         <h4> Test: {{ $candidateTest->test->name }}</h4>
                     </div>
                     <div>
-                        <button id="prev-btn" class="btn btn-secondary mb-3 me-4">Previous</button>
-                        <button id="next-btn" class="btn btn-secondary mb-3 ms-4">Next</button>
+                        <button id="prev-btn" class="btn btn-primary mb-3">Previous</button>
+                        <button id="next-btn" class="btn btn-primary mb-3 ms-4">Next</button>
 
                     </div>
                     <div>
@@ -94,17 +94,17 @@
     </footer>
 
     <script>
-        // var duration = 60 * 10; // in second÷÷s
-
         var date = new Date();
         expires = 'expires=';
         date.setDate(date.getDate() + 1);
         expires += date.toGMTString();
+
         var currentQuestion = 1;
         var candidateTestId = {{ $candidateTest->id }}
         const timerVariableName = 'timer';
+
         let existingTimerValue = sessionStorage.getItem(timerVariableName);
-        let duration;
+        // let duration;
 
         if (existingTimerValue) {
             duration = parseInt(existingTimerValue);
@@ -113,7 +113,7 @@
         } else {
             // duration = 60; // or any other default value you want to use
             sessionStorage.setItem(timerVariableName, {{ $candidateTest->test->duration }});
-            duration = parseInt(sessionStorage.getItem(timerVariableName)) * 60;
+            duration = parseInt(sessionStorage.getItem(timerVariableName));
             var display = document.querySelector('#timer');
             updateTimer(duration, display);
         }
@@ -248,6 +248,7 @@
         function
         submitExam() {
             localStorage.removeItem('response');
+            sessionStorage.removeItem('timer');
             window.location.href = "/candidate/submit/" + candidateTestId;
         }
     </script>

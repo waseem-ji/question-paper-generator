@@ -15,7 +15,7 @@ class AddTestController extends Controller
      */
     public function create($drive_id)
     {
-        $tests = Test::all();
+        $tests = Test::paginate(10);
         return view('drive.addTest', compact('tests', 'drive_id'));
     }
 

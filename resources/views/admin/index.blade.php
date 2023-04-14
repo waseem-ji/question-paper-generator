@@ -3,7 +3,7 @@
         <h3>Admin Panel</h3>
         <a class="btn btn-success me-3" href="{{ route('admin.create') }} "> Add New User</a>
     </x-slot:title>
-    <div class="col-11 mx-auto">
+    <div class="col">
         <table class="table table-bordered table-hover table-light ">
             <thead>
                 <tr>

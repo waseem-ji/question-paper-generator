@@ -16,7 +16,6 @@
                 </div>
                 <div class="row align-middle">
 
-
                 </div>
             </div>
         </div>
@@ -33,8 +32,8 @@
 
     </x-slot:navItem>
 
-    <div class="row mt-5">
-        <div class="col-11 mx-auto">
+    <div class="row mt-5 m-4">
+        <div class="col">
             <table class="table table-bordered table-hover table-light">
                 <thead>
                     <tr>
@@ -46,7 +45,7 @@
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    @foreach ($candidates as $key=>$candidate)
+                    @foreach ($candidates as $key => $candidate)
                         <tr>
                             <th scope="row">{{ $candidates->firstItem() + $key }}</th>
                             <td>{{ $candidate->name }}</td>
@@ -58,7 +57,7 @@
 
                 </tbody>
             </table>
-            {{$candidates->links()}}
+            {{ $candidates->links() }}
         </div>
     </div>
     <x-flash />

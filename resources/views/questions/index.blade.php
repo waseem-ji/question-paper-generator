@@ -17,9 +17,9 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider border-1">
-                @foreach ($questions as $key=>$question)
+                @foreach ($questions as $key => $question)
                     <tr>
-                        {{-- <th scope="row">{{ $questions->firstItem()+$key }}</th> --}}
+                        {{-- <th scope="row">{{ $loop->iteration }}</th> --}}
                         <td>{{ $question->question }}</td>
                         <td>{{ $question->category->name }}</td>
                         <td>{{ $question->difficulty }}</td>
@@ -34,8 +34,8 @@
                                 </div>
                                 <div>
 
-                                    <form class="dropdown-item text-center" action="{{ route('questions.destroy', $question->id) }}"
-                                        method="post">
+                                    <form class="dropdown-item text-center"
+                                        action="{{ route('questions.destroy', $question->id) }}" method="post">
                                         @csrf
                                         @method('DELETE')
 
@@ -46,7 +46,6 @@
                                     </form>
 
                                 </div>
-
 
                             </div>
                         </td>

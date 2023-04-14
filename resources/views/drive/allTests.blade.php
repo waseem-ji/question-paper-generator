@@ -33,8 +33,7 @@
         </li>
     </x-slot:navItem>
 
-
-    <div class="col-11 mx-auto mt-5">
+    <div class="col mt-5 m-4">
         <table class="table table-bordered table-hover table-light ">
             <thead>
                 <tr>
@@ -56,7 +55,8 @@
                         <td>
                             <div class="d-flex gap-3 ">
                                 <div class="">
-                                    <a href="{{ route('driveTest', $item->id) }}" class="btn btn-success fw-bold ">View</a>
+                                    <a href="{{ route('driveTest', $item->id) }}"
+                                        class="btn btn-success fw-bold ">View</a>
                                 </div>
                                 <div>
 

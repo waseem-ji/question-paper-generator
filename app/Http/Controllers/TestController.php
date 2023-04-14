@@ -15,7 +15,7 @@ class TestController extends Controller
     public function index()
     {
         $tests = Test::paginate(10);
-        return view('test.index',compact(['tests']));
+        return view('test.index', compact(['tests']));
     }
 
     /**
@@ -50,7 +50,7 @@ class TestController extends Controller
 
         ]);
 
-        return redirect(route('tests.index'))->with('success','New test created');
+        return redirect(route('tests.index'))->with('success', 'New test created');
     }
 
     /**
@@ -61,8 +61,7 @@ class TestController extends Controller
      */
     public function show(Test $test)
     {
-
-        return view('test.show',compact(['test']));
+        return view('test.show', compact(['test']));
     }
 
     /**
@@ -73,7 +72,7 @@ class TestController extends Controller
      */
     public function edit(Test $test)
     {
-        return view('test.edit',compact(['test']));
+        return view('test.edit', compact(['test']));
     }
 
     /**
@@ -88,17 +87,18 @@ class TestController extends Controller
         request()->validate([
             'name' => 'required',
             'instructions' => 'required',
-            // 'duration' => ['required','numeric']
-
-
+            'duration' => ['required','numeric']
         ]);
+
+        $duration = request()->duration * 60;
+
         $test->update([
             'name' => request()->name,
-            'instructions' => request()->instructions
+            'instructions' => request()->instructions,
+            'duration' => $duration
         ]);
 
         return redirect(route('tests.index'))->with('info', 'Test Details updated');
-
     }
 
     /**
@@ -110,6 +110,6 @@ class TestController extends Controller
     public function destroy(Test $test)
     {
         $test->delete();
-        return redirect(route('tests.index') )->with('danger', 'Test Archived Succesfully');
+        return redirect(route('tests.index'))->with('danger', 'Test Archived Succesfully');
     }
 }
