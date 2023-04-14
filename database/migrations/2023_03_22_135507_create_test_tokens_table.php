@@ -18,7 +18,6 @@ class CreateTestTokensTable extends Migration
             $table->foreignId('drive_test_id');
             $table->string('token', 6)->unique();
             $table->dateTime('expiry');
-            $table->boolean('is_expired')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

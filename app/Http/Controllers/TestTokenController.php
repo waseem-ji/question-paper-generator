@@ -11,6 +11,10 @@ class TestTokenController extends Controller
 {
     public function generatetoken(DriveTest $driveTest)
     {
+        request()->validate([
+            'duration' => 'required|numeric'
+        ]);
+
         $duration = request()->duration;
 
 

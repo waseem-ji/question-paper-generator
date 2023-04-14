@@ -4,7 +4,9 @@
             <div class="container d-flex justify-content-between align-items-center ">
                 <div class="row">
                     <div class="col-auto fw-bold p-0">Drive Name:</div>
-                    <div class="col p-0 ms-2"><a class="text-decoration-none" href="{{route('drives.show',$driveTest->drive->id)}}">{{$driveTest->drive->name}}</a> </div>
+                    <div class="col p-0 ms-2"><a class="text-decoration-none"
+                            href="{{ route('drives.show', $driveTest->drive->id) }}">{{ $driveTest->drive->name }}</a>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-auto fw-bold p-0">Test Name:</div>
@@ -33,7 +35,7 @@
             <a class="nav-link active px-5" href="{{ route('driveTest.tokens', $driveTest->id) }}">Tokens</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link px-5" href="{{route('driveTest.candidates',$driveTest->id)}}">Candidates</a>
+            <a class="nav-link px-5" href="{{ route('driveTest.candidates', $driveTest->id) }}">Candidates</a>
         </li>
     </x-slot:navItem>
     <div class="container">
@@ -64,6 +66,9 @@
                                     </span>
                                 </div>
                             </div>
+                            @error('duration')
+                                <p class="text-danger">{{ $message }} </p>
+                            @enderror
                             <div class="d-flex justify-content-end mt-3">
                                 <button type="submit" class="btn btn-success me-3" href=" "> Generate
                                     Token</button>
@@ -76,7 +81,7 @@
             </div>
         </div>
         <div class="row mt-5">
-            <div class="col-9 mx-auto">
+            <div class="col mx-auto">
                 <table class="table table-bordered table-hover table-light ">
                     <thead>
                         <tr>
@@ -88,13 +93,20 @@
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        @foreach ($allTokens as $key=>$token)
+                        @foreach ($allTokens as $key => $token)
                             <tr>
-                                <th scope="row">{{ $allTokens->firstItem() + $key}}</th>
+                                <th scope="row">{{ $allTokens->firstItem() + $key }}</th>
                                 <td>{{ $token->token }}</td>
                                 <td>{{ $token->created_at }}</td>
                                 <td>{{ $token->expiry }}</td>
-                                <td class="fw-bold {{$token->is_expired ? 'text-danger' : 'text-success'}}">{{ $token->is_expired ? 'Expired' : 'Active' }}</td>
+                                @php
+                                    $status = false;
+                                    if ($token->expiry < Carbon\Carbon::now()) {
+                                        $status = true;
+                                    }
+                                @endphp
+                                <td class="fw-bold {{ $status ? 'text-danger' : 'text-success' }}">
+                                    {{ $status ? 'Expired' : 'Active' }}</td>
                             </tr>
                         @endforeach
 

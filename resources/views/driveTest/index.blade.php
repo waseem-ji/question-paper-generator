@@ -4,7 +4,9 @@
             <div class="container d-flex justify-content-between align-items-center">
                 <div class="row">
                     <div class="col-auto fw-bold p-0">Drive Name:</div>
-                    <div class="col p-0 ms-2"><a class="text-decoration-none" href="{{route('drives.show',$driveTest->drive->id)}}">{{$driveTest->drive->name}}</a> </div>
+                    <div class="col p-0 ms-2"><a class="text-decoration-none"
+                            href="{{ route('drives.show', $driveTest->drive->id) }}">{{ $driveTest->drive->name }}</a>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-auto fw-bold p-0">Test Name:</div>
@@ -33,91 +35,70 @@
             <a class="nav-link px-5" href="{{ route('driveTest.tokens', $driveTest->id) }}">Tokens</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link px-5" href="{{route('driveTest.candidates',$driveTest->id)}}">Candidates</a>
+            <a class="nav-link px-5" href="{{ route('driveTest.candidates', $driveTest->id) }}">Candidates</a>
         </li>
     </x-slot:navItem>
     {{-- Can include the test paper here in the info page --}}
     <div class="container">
         <x-panel class="mt-2 mb-5 border-0  bg-light">
-        <div class="row">
-            <div class="col">
 
+            <div class="row">
+                <h3>Specific Questions</h3>
+                <table id="questionTable" class="table table-bordered table-hover table-light py-3">
                     @php
                         $questions = $driveTest->test->specific_questions;
                         $random = $driveTest->test->random_questions;
                     @endphp
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Question</th>
+                            <th scope="col">Choice</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Difficulty</th>
+                            <th scope="col">Type</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider border-1">
+                        @foreach ($questions as $key => $question)
+                            <tr>
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td style="width:60%;">{{ $question->question->question }}</td>
+                                @isset($question->question->choice)
+                                    <div class="list-group">
+                                        <div class="d-flex gap-2 w-100 justify-content-between">
+                                            <div>
 
-                    {{-- asdasd --}}
-                    @foreach ($questions as $question)
-                        <div class="card w-75 mx-auto m-5 rounded-2">
-                            <div class="card-header">
-                                <div class="d-flex justify-content-between">
-                                    <div class="">
-                                        Question {{ $loop->iteration }}
-                                    </div>
-                                    <div class="me-3">
-                                        {{-- <span class="badge bg-primary ms-3 p-2">
-                                            {{ $question->category->name }}</span> --}}
-                                        <span
-                                            class="badge < class= p-2 '
-                                                        @php switch ($question->question->difficulty) {
-                                                            case 'hard':
-                                                                echo 'bg-danger';
-                                                                break;
-                                                            case 'medium':
-                                                                echo 'bg-warning';
-                                                                break;
-                                                            case 'easy':
-                                                                echo 'bg-success';
-                                                                break;
-                                                        } @endphp
-                                                        ' >
-                                                    {{ $question->question->text }}
-                                                ">
-                                            {{ $question->question->difficulty }} </span>
+                                                @php
+                                                    $choice = json_decode($question->question->choice);
+                                                @endphp
+                                                <td>
 
-                                        <span class="badge bg-info p-2 "> {{ $question->question->type }} </span>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="card-body">
-                                <blockquote class="blockquote mb-0">
-                                    <p>{{ $question->question->question }} </p>
-
-                                    @isset($question->question->choice)
-                                        <div class="list-group">
-                                            <div class="d-flex gap-2 w-100 justify-content-between">
-                                                <div>
-
-                                                    @php
-                                                        $choice = json_decode($question->question->choice);
-                                                    @endphp
                                                     @foreach ($choice as $key => $item)
                                                         <div>
-                                                            <span class="fw-bold me-2"> {{ $key }} </span>
-                                                            {{ $item }}
+                                                            <p> {{ $key }}: {{ $item }} </p>
+
                                                         </div>
                                                     @endforeach
-
-                                                </div>
-
+                                                </td>
                                             </div>
 
                                         </div>
-                                    @endisset
 
-                                </blockquote>
+                                    </div>
+                                @endisset
+                                <td>{{ $question->question->category->name }}</td>
+                                <td>{{ $question->question->difficulty }}</td>
+                                <td>{{ $question->question->type }}</td>
 
-                            </div>
+                            </tr>
+                        @endforeach
 
-                        </div>
-                    @endforeach
-
-                </div>
+                    </tbody>
+                </table>
             </div>
-            <div class="row">
+            <div class="row mt-4">
+                <h3>Random Questions</h3>
                 <table class=" table table-bordered table-hover table-light ">
                     <thead>
                         <tr>
@@ -127,7 +108,7 @@
                             <th scope="col">Number of questions</th>
                         </tr>
                     </thead>
-                    <tbody class="table-group-divider border-2">
+                    <tbody class="table-group-divider">
                         @foreach ($random as $item)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
