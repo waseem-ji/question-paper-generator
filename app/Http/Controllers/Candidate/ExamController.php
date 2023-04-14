@@ -64,6 +64,11 @@ class ExamController extends Controller
 
     public function loadExam(CandidateTest $candidateTest)
     {
+        //Ensure candidate is not accessing other exam paper
+        $candidateTestId = session('candidateTestId');
+        if ($candidateTestId != $candidateTest->id) {
+            abort(403);
+        }
         $questionsArray = json_decode($candidateTest->question_paper);
         $questions = Question::whereIn('id', $questionsArray)->get();
         // session(['time' => $candidateTest->test->duration]);
@@ -104,7 +109,8 @@ class ExamController extends Controller
         $candidateTest->update([
             'feedback' => $request->feedback
         ]);
-
+        session()->forget('candidateTestId');
+        session()->forget('testId');
         return redirect(route('candidate.login'));
     }
 }
