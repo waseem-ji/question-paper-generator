@@ -6,7 +6,7 @@
 
         <div class="d-flex justify-content-between mb-5">
 
-            <a class="btn btn-primary me-3" href="{{ route('showDriveTests',$drive_id) }} ">Go Back</a>
+            <a class="btn btn-primary me-3" href="{{ route('drives.tests', $drive_id) }} ">Go Back</a>
             <p></p>
             {{-- <a class="btn btn-success me-3" href="{{ route('addTest', $drive->id) }} "> Add New Test</a> --}}
 
