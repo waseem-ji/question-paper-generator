@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Candidate;
 use App\Http\Controllers\Controller;
 use App\Models\Candidate;
 use App\Models\TestToken;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
@@ -31,21 +32,13 @@ class CandidateController extends Controller
             return redirect()->back()->withErrors(['error' => 'The access Code does not exists. Please carefully check and re-enter the code. If the problem persists contact the invigilator ']);
         }
 
-        $tokenData = $tokenData->where('token', $request->token)->where('is_expired', false)->firstOr(function () {
-            return 1;
-        });
-
-        if ($tokenData === 1) {
-            return redirect()->back()->withErrors(['error' => 'The access Code has expired ']);
+        if ($tokenData->expiry < Carbon::now()) {
+            return redirect()->back()->withErrors(['error' => 'The access Code has expired !!']);
         }
         // Store the token value in the session
         session(['testId' => $tokenData->driveTest->test_id]);
         session(['driveTestId' => $tokenData->drive_test_id]);
-        //Create a response instance
-        $response = new Response('Hello World');
 
-        //Call the withCookie() method with the response method
-        // session(['tokenId' => $tokenData->id]);
         return redirect(route('candidate.email', $tokenData));
     }
 

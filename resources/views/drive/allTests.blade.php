@@ -39,7 +39,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Duration</th>
+                    <th scope="col">Duration <span class="lead">(mins)</span> </th>
                     <th scope="col">Created On</th>
                     <th scope="col">Actions</th>
 
@@ -50,7 +50,7 @@
                     <tr>
                         <th scope="row">{{ $driveTests->firstItem() + $key }}</th>
                         <td>{{ $item->test->name }}</td>
-                        <td>{{ $item->test->duration }}</td>
+                        <td>{{ $item->test->duration / 60 }}</td>
                         <td>{{ date('d-m-Y', strtotime($item->test->created_at)) }} </td>
                         <td>
                             <div class="d-flex gap-3 ">

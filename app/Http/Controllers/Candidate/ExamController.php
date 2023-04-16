@@ -16,7 +16,7 @@ class ExamController extends Controller
         $questionsArray = array();
 
         $test =  Test::where('id', $testId)->first();
-        // dd($testId);
+
         $specificQuestions = $test->specific_questions;
         foreach ($specificQuestions as $item) {
             $questionsArray[] = $item->question_id;
@@ -46,32 +46,42 @@ class ExamController extends Controller
     public function processExam(Candidate $candidate)
     {
         $testId = session('testId');
-        // dd("asdas");
+        $getCandidatePaper = CandidateTest::where('drive_test_id', session('driveTestId'))
+                                            ->where('candidate_id', $candidate->id)
+                                            ->where('test_id', $testId)
+                                            ->first();
 
-        $questions = json_encode($this->getQuestions($testId));
-        // dd($questions);
-        $candidateTest = CandidateTest::create([
-            'question_paper' => $questions,
-            'test_id' => $testId,
-            'candidate_id' =>   $candidate->id,
-            'drive_test_id' => session('driveTestId')
-        ]);
 
-        session(['candidateTestId' => $candidateTest->id]);
-        return redirect(route('candidate.exam', $candidateTest));
+        if ($getCandidatePaper) {
+            session(['candidateTestId' => $getCandidatePaper->id]);
+            return redirect(route('candidate.exam', $getCandidatePaper));
+        } else {
+            $questions = json_encode($this->getQuestions($testId));
+            $candidateTest = CandidateTest::create([
+                'question_paper' => $questions,
+                'test_id' => $testId,
+                'candidate_id' =>   $candidate->id,
+                'drive_test_id' => session('driveTestId')
+            ]);
+            session(['candidateTestId' => $candidateTest->id]);
+            return redirect(route('candidate.exam', $candidateTest));
+        }
     }
 
 
     public function loadExam(CandidateTest $candidateTest)
     {
-        //Ensure candidate is not accessing other exam paper
         $candidateTestId = session('candidateTestId');
         if ($candidateTestId != $candidateTest->id) {
             abort(403);
         }
+
+        if($candidateTest->is_completed){
+            abort(403);
+        }
+
         $questionsArray = json_decode($candidateTest->question_paper);
         $questions = Question::whereIn('id', $questionsArray)->get();
-        // session(['time' => $candidateTest->test->duration]);
 
         return view('candidate.exam', compact(['questions','candidateTest']));
     }
@@ -82,8 +92,6 @@ class ExamController extends Controller
         $candidateTest = CandidateTest::find($candidateTestId);
 
         $results = $request->response;
-        // dd($results);
-
         $candidateTest->update([
             'response' => $results
         ]);
@@ -92,7 +100,6 @@ class ExamController extends Controller
             'success' => true,
             'data' => $results
         ]);
-        // return ($candidateId);
     }
 
     public function submitExam(CandidateTest $candidateTest)
@@ -103,11 +110,12 @@ class ExamController extends Controller
     public function feedback(Request $request, CandidateTest $candidateTest)
     {
         $request->validate([
-            'feedback' => 'required'
+            'feedback' => 'required|max:2000'
         ]);
 
         $candidateTest->update([
-            'feedback' => $request->feedback
+            'feedback' => $request->feedback,
+            'is_completed' => true
         ]);
         session()->forget('candidateTestId');
         session()->forget('testId');

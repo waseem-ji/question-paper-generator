@@ -21,6 +21,8 @@ class CreateCandidateTestsTable extends Migration
             $table->json('question_paper');
             $table->json('response')->nullable();
             $table->json('result')->nullable();
+            $table->longText('feedback')->nullable();
+            $table->boolean('is_completed')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

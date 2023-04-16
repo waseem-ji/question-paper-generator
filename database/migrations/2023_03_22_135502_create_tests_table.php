@@ -16,10 +16,10 @@ class CreateTestsTable extends Migration
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('duration')->nullable();
+            $table->integer('duration');
             $table->longText('instructions');
             $table->timestamps();
-            $table->softDeletes(); //Would it be better if didnot softdelete this ?
+            $table->softDeletes();
         });
     }
 

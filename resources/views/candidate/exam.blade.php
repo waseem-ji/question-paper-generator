@@ -1,8 +1,4 @@
 <x-candidate-layout>
-    {{-- @php
-    $current_time = time();
-
-@endphp --}}
     <div class="position-relative">
         <div id="timer" class="position-absolute top-0 end-0 px-4 py-3  text-center fs-4 mb-4 bg-danger fw-bold"
             style="margin-right:280px; width:10%; height:70px"></div>
@@ -55,6 +51,13 @@
                                 <div class="row mb-5">
                                     <div class="col d-flex justify-content-between">
                                         <h4>Select an option</h4>
+                                        <button class="clear-selection-btn btn fw-lighter"
+                                            onclick="removeSelection({{ $question->id }})"> Clear Selection <span><svg
+                                                    xmlns="http://www.w3.org/2000/svg" fill="#000000" width="25px"
+                                                    height="25px" viewBox="0 0 32 32">
+                                                    <path
+                                                        d="M7.004 23.087l7.08-7.081-7.07-7.071L8.929 7.02l7.067 7.069L23.084 7l1.912 1.913-7.089 7.093 7.075 7.077-1.912 1.913-7.074-7.073L8.917 25z" />
+                                                </svg></span> </button>
                                     </div>
                                 </div>
                                 @isset($question->choice)
@@ -65,10 +68,11 @@
                                         @foreach ($choice as $key => $item)
                                             <div class="col border border-1 border-secondary-subtle shadow p-3 fs-5 fw-bold my-4 bg-white bg-opacity-100 rounded-3 answerBox"
                                                 id="answerBox{{ $question->id }}{{ $key }}">
-                                                <input type="radio" id="option{{ $key }}"
-                                                    name="answer-{{ $question->id }}" value="{{ $key }}"
+                                                <input type="radio" id="question-{{ $question->id }}{{ $key }}"
+                                                    {{-- id="option{{ $key }}" --}} name="answer-{{ $question->id }}"
+                                                    value="{{ $key }}"
                                                     onclick="saveAnswer({{ $question->id }},{{ $key }},'{{ $item }}')"
-                                                    class="answerOption">
+                                                    class="answerOption selectedOption{{ $question->id }}">
                                                 <label for="option{{ $key }}">{{ $item }}</label>
 
                                             </div>
@@ -86,114 +90,120 @@
     <footer class="footer mt-auto py-3 bg-body-tertiary">
         <div class="container d-flex justify-content-center">
             <span class="text-body-secondary me-2">Go to question </span>
-            @for ($i = 1; $i <= $questions->count(); $i++)
-                <button class="questionButton btn btn-outline-dark ms-3" id="button-{{ $i }}"
-                    onclick="showQuestion({{ $i }})"> {{ $i }}</button>
-            @endfor
+            @foreach ($questions as $question)
+                <button class="questionButton btn btn-outline-dark ms-3 selectedButton-{{ $question->id }}"
+                    id="button-{{ $loop->iteration }}" onclick="showQuestion({{ $loop->iteration }})">
+                    {{ $loop->iteration }}</button>
+            @endforeach
         </div>
     </footer>
 
     <script>
-        var date = new Date();
-        expires = 'expires=';
-        date.setDate(date.getDate() + 1);
-        expires += date.toGMTString();
-
         var currentQuestion = 1;
         var candidateTestId = {{ $candidateTest->id }}
         const timerVariableName = 'timer';
 
-        let existingTimerValue = sessionStorage.getItem(timerVariableName);
-        // let duration;
+        let existingTimerValue = localStorage.getItem(timerVariableName);
 
         if (existingTimerValue) {
             duration = parseInt(existingTimerValue);
             var display = document.querySelector('#timer');
             updateTimer(duration, display);
         } else {
-            // duration = 60; // or any other default value you want to use
-            sessionStorage.setItem(timerVariableName, {{ $candidateTest->test->duration }});
-            duration = parseInt(sessionStorage.getItem(timerVariableName));
+            localStorage.setItem(timerVariableName, {{ $candidateTest->test->duration }});
+            duration = parseInt(localStorage.getItem(timerVariableName));
             var display = document.querySelector('#timer');
             updateTimer(duration, display);
         }
+        // Retriving old reponse and selecting them
+        var responseStr = <?php echo json_encode($candidateTest->response); ?>;
+        var oldResponse = JSON.parse(responseStr);
+        for (var questionID in oldResponse) {
+
+            if (oldResponse.hasOwnProperty(questionID)) {
+
+
+                var response = JSON.parse(localStorage.getItem('response')) || {};
+                response[questionID] = oldResponse[questionID];
+
+                localStorage.setItem('response', JSON.stringify(response));
+
+                var radioElement = document.getElementById('question-' + questionID + oldResponse[questionID]);
+
+                if (radioElement) {
+                    radioElement.checked = true;
+                    $('.selectedButton-' + questionID).removeClass("btn-outline-dark");
+                    $('.selectedButton-' + questionID).addClass("btn-success");
+
+                }
+            }
+        }
+
+
 
         $(function() {
 
             var totalQuestions = $('.question').length;
 
-            // Hide all questions except the first one
             $('.question').hide();
             $('#question-1').show();
-            $('#button-1').attr("class", "questionButtton btn btn-outline-dark active ms-3");
+            $('#button-1').addClass("active");
 
-            $('.answerList').attr("class",
-                "col border border-1 border-secondary-subtle shadow p-3 fs-5 fw-bold my-4 bg-white bg-opacity-100 rounded-3"
-            );
-
-
-            // Show the next question when the "Next" button is clicked
             $('#next-btn').click(function() {
                 if (currentQuestion < totalQuestions) {
                     currentQuestion++;
                     $('.question').hide();
                     $('#question-' +
                         currentQuestion).show();
-                    $('.questionButtton').attr("class", "questionButtton btn btn-outline-dark ms-3");
-                    $('#button-' + currentQuestion).attr("class",
-                        "questionButtton btn btn-outline-dark ms-3 active"); //
-                    // saveAnswer(currentQuestion, )
+                    $('.questionButton').removeClass("active");
+                    $('#button-' + currentQuestion).addClass("active");
                 }
-            }); // Show the previous question when the "Previous" button is clicked
+            });
             $('#prev-btn').click(function() {
                 if (currentQuestion > 1) {
                     currentQuestion--;
                     $('.question').hide();
                     $('#question-' + currentQuestion).show();
 
-                    $('.questionButtton').attr("class", "questionButtton btn btn-outline-dark ms-3");
-                    $('#button-' + currentQuestion).attr("class",
-                        "questionButtton btn btn-outline-dark ms-3 active");
+                    $('.questionButton').removeClass("active");
+
+                    $('#button-' + currentQuestion).addClass("active");
                 }
             });
 
         });
-        $(document).ready(function() {
-            $('.answerOption').change(function() {
-                // Get the parent answer box
-                var answerBox = $(this).closest('.answerBox');
 
-                // Remove the green color from all answerBox elements
+        function removeSelection(questionID) {
+            var response = JSON.parse(localStorage.getItem('response')) || {};
 
-                $('.answerBox').removeClass('border-success').addClass('border-secondary-subtle');
+            delete response[questionID];
+            localStorage.setItem('response', JSON.stringify(response));
+
+            $('.selectedOption' + questionID).prop('checked', false);
+            $.ajax({
+                url: "/candidate/save-answer",
+                type: "POST",
+                data: {
+                    'response': response,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(data) {
 
 
-                // Add the green color to the selected answerBox element
-                answerBox.addClass('border-success').removeClass('border-secondary-subtle');
-
-                if (!$("input:radio[class='answerOption']").is(':checked')) {
-                    console.log("chekek");
-                } else {
-                    // alert('NO radio buttons is checked!');
-                    console.log("cheked ");
-                    $("input:radio[class='answerOption']").addClass('border-success').removeClass(
-                        'border-secondary-subtle');
                 }
             });
-        });
 
+            $('.selectedButton-' + questionID).removeClass("btn-success");
+            $('.selectedButton-' + questionID).addClass("btn-outline-dark");
 
-
+        }
 
         function showQuestion(questionNumber) {
-            // saveAnswer(currentQuestion, )
             $('.question').hide();
-            // currentQuestion = pageNumber
             $('#question-' + questionNumber).show();
 
-            $('.questionButtton').attr("class", " questionButtton btn btn-outline-dark ms-3");
-            $('#button-' + questionNumber).attr("class", "questionButtton btn btn-outline-dark ms-3 active");
-
+            $('.questionButton').removeClass("active");
+            $('#button-' + questionNumber).addClass("active");
             currentQuestion = questionNumber;
 
         }
@@ -201,16 +211,13 @@
         function saveAnswer(questionId, option) {
 
             var response = JSON.parse(localStorage.getItem('response')) || {};
-
-            // Add or update the answer for the current question
             response[questionId] = option;
 
-            // Store the updated results in session storage
+            $('#button-' + currentQuestion).removeClass("btn-outline-dark");
+            $('#button-' + currentQuestion).addClass("btn-success");
+
             localStorage.setItem('response', JSON.stringify(response));
 
-            // $('#answerBox' + questionId + option).attr("class",
-            //     "col border border-2 border-success shadow p-3 fs-5 fw-bold my-4 bg-white bg-opacity-100 rounded-3"
-            // );
 
 
             $.ajax({
@@ -220,10 +227,6 @@
                     'response': response,
                     _token: '{{ csrf_token() }}'
                 },
-                success: function(data) {
-                    console.log(data);
-                    console.log("Answer saved for question " + questionId);
-                }
             });
         }
 
@@ -233,12 +236,12 @@
             setInterval(function() {
                 minutes = parseInt(timer / 60, 10);
                 seconds = parseInt(timer % 60, 10);
+                remaining = minutes * 60 + seconds;
 
                 minutes = minutes < 10 ? "0" + minutes : minutes;
                 seconds = seconds < 10 ? "0" + seconds : seconds;
                 display.textContent = minutes + ":" + seconds;
-                remaining = minutes * 60 + seconds; //
-                sessionStorage.setItem(timerVariableName, remaining);
+                localStorage.setItem(timerVariableName, remaining);
                 if (--timer < 0) {
                     submitExam();
                 }
@@ -248,7 +251,7 @@
         function
         submitExam() {
             localStorage.removeItem('response');
-            sessionStorage.removeItem('timer');
+            localStorage.removeItem('timer');
             window.location.href = "/candidate/submit/" + candidateTestId;
         }
     </script>
