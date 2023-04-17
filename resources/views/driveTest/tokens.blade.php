@@ -41,7 +41,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <x-panel class="bg-light rounded-1 col-7 mx-auto">
+                <x-panel class="bg-light rounded-1 col-6 mx-auto">
                     <div class="ms-5">
                         <form action="{{ route('generateToken', $driveTest->id) }}" class="mt-3" method="POST">
                             @csrf

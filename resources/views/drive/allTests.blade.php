@@ -39,7 +39,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Duration <span class="lead">(mins)</span> </th>
+                    <th scope="col">Duration <span class="leadw">(mins)</span> </th>
                     <th scope="col">Created On</th>
                     <th scope="col">Actions</th>
 

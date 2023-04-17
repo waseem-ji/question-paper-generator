@@ -76,7 +76,7 @@ class ExamController extends Controller
             abort(403);
         }
 
-        if($candidateTest->is_completed){
+        if ($candidateTest->is_completed) {
             abort(403);
         }
 
@@ -104,6 +104,10 @@ class ExamController extends Controller
 
     public function submitExam(CandidateTest $candidateTest)
     {
+        $candidateTest->update([
+            'is_completed' => true
+        ]);
+        $this->calculateResults($candidateTest->id);
         return view('candidate.finish', compact(['candidateTest']));
     }
 
@@ -117,8 +121,28 @@ class ExamController extends Controller
             'feedback' => $request->feedback,
             'is_completed' => true
         ]);
+
         session()->forget('candidateTestId');
         session()->forget('testId');
         return redirect(route('candidate.login'));
+    }
+
+    public function calculateResults($candidateTestId)
+    {
+        $result = 0;
+        $query = CandidateTest::where('id', $candidateTestId)->first();
+        $response = json_decode($query->response);
+
+
+        foreach ($response as  $question =>$answer) {
+            $correctAnswer = Question::where('id', $question)->pluck('correct_option')->first();
+
+            if ($correctAnswer === $answer) {
+                $result+=1 ;
+            }
+        }
+        $query->update([
+            'result' => $result
+        ]);
     }
 }

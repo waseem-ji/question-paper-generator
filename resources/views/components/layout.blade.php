@@ -127,7 +127,7 @@
                                 Drives
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -139,13 +139,13 @@
                                 </svg>
                                 Reports
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
 
-                    <h6
+                    {{-- <h6
                         class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted text-uppercase">
-                        <span>Placeholder</span>
-                        {{-- <a class="link-secondary" href="#" aria-label="Add a new report">
+                        <span>Placeholder</span> --}}
+                    {{-- <a class="link-secondary" href="#" aria-label="Add a new report">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round"
@@ -155,8 +155,8 @@
                                 <line x1="8" y1="12" x2="16" y2="12"></line>
                             </svg>
                         </a> --}}
-                    </h6>
-                    <ul class="nav flex-column mb-2">
+                    {{-- </h6> --}}
+                    {{-- <ul class="nav flex-column mb-2">
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -217,7 +217,7 @@
                                 Place Holder 4
                             </a>
                         </li>
-                    </ul>
+                    </ul> --}}
                 </div>
             </nav>
 

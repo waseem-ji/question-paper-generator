@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Candidate;
 use App\Models\CandidateTest;
 use App\Models\DriveTest;
 use App\Models\Test;
@@ -23,7 +24,7 @@ class DriveTestController extends Controller
 
     public function viewCandidates(DriveTest $driveTest)
     {
-        $cadidates = CandidateTest::where('test_id',$driveTest->test_id)->paginate(10);
-        dd($cadidates);
+        $candidateTests = CandidateTest::where('test_id', $driveTest->test_id)->filter()->paginate(10);
+        return view('driveTest.candidates', compact(['driveTest','candidateTests']));
     }
 }

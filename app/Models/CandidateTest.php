@@ -13,13 +13,21 @@ class CandidateTest extends Model
 
     protected $guarded = ['id'];
 
+
+    public function scopeFilter($query)
+    {
+        if (request('cutOff')) {
+            $query->where('result', '>', request('cutOff'));
+        }
+    }
+
     public function driveTest()
     {
         return $this->hasMany(DriveTest::class);
     }
     public function candidate()
     {
-        return $this->belongs(Candidate::class);
+        return $this->belongsTo(Candidate::class);
     }
 
     public function test()
